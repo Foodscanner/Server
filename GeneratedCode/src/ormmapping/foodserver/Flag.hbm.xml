@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Hamburg University of Applied Sciences
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="foodserver.Flag" table="Flag" lazy="false">
+		<id name="_id" column="_id" type="long" unsaved-value="0">
+			<generator class="native">
+			</generator>
+		</id>
+		<many-to-one name="_unnamed_Ingredient_" column="Ingredient_id" class="foodserver.Ingredient" cascade="save-update,lock" unique="true" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<many-to-one name="_unnamed_Article_" column="Article_id" class="foodserver.Article" cascade="save-update,lock" unique="true" not-null="true" lazy="proxy" access="field">
+		</many-to-one>
+		<property name="_name" column="_name" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_description" column="_description" type="string" length="255" not-null="false" lazy="false"/>
+		<property name="_limitToProduct" column="_limitToProduct" type="boolean" not-null="true" lazy="false"/>
+	</class>
+</hibernate-mapping>
