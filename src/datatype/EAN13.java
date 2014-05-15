@@ -17,7 +17,7 @@ public class EAN13 implements IEAN{
   /**
    * Standard constructor for the EAN
    */
-public EAN13() {
+  public EAN13() {
     
   }
   
