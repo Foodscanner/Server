@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,7 +16,11 @@ import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.Article;
 import foodServer.ArticleUtil;
+import foodServer.Flag;
 import foodServer.IArticle;
+import foodServer.IFlag;
+import foodServer.IIngredient;
+import foodServer.Ingredient;
 import foodServer.exceptions.NumberInvalidFormatException;
 
 public class ArticlePersistenceTests {
@@ -24,6 +29,7 @@ public class ArticlePersistenceTests {
   Article articleTwo;
   IEAN ean1;
   IEAN ean2;
+  List<IFlag> flags;
   
 
   @BeforeClass
@@ -52,8 +58,29 @@ public class ArticlePersistenceTests {
     ean1 = new EAN13(5010019640161L);
     ean2 = new EAN13(1234567891019L);
     articleOne = new Article(ean1);
+    for(int i=0;i<10;i++){
+    	IFlag flag = new Flag();
+    	flag.setDescription("Desc: " + i);
+    	flag.setName("Name: " + i);
+        flags.add(flag);
+        articleOne.addFlag(flag);
+    }
     articleOne.setName("Goldbären");
     articleOne.setDescription("Yummy yummy");
+    
+    for(int i=0;i<10;i++){
+    	 IIngredient ingredient = new Ingredient();
+         ingredient.setName("IngredientName: " + i);
+         
+    	for(int j=0;j<10;j++){
+    		IFlag flag = new Flag();
+        	flag.setDescription("IngredientFlag-Desc: " + "i: " + i+ "j: " + j);
+        	flag.setName("IngredientFlag-Name: " + "i: " + i+ "j: " + j);
+    		ingredient.addFlag(flag);
+    	}    	
+        articleOne.addIngredient(ingredient);
+    }
+    
     //An example for a URI, follows RFC standard for URI and is from the IANA reserved name space for tests 
     try {
       articleOne.setImageURI(new URI("http://example.com/getImage?param=exampleParam"));
@@ -132,7 +159,11 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetIngredients() {
-    fail("Not yet implemented");
+	    articleOne.persist();
+	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	    for(IIngredient ingredient:newArticle.getIngredients()){
+	    	assertTrue(articleOne.getIngredients().contains(ingredient));
+	    }
   }
 
   /**
@@ -141,7 +172,11 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetFlags() {
-    fail("Not yet implemented");
+	  articleOne.persist();
+	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	    for(IFlag flag:newArticle.getFlags()){
+	    	assertTrue(articleOne.getFlags().contains(flag));
+	    }
   }
 
   /**
@@ -150,7 +185,11 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetProductFlags() {
-    fail("Not yet implemented");
+	  articleOne.persist();
+	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	    for(IFlag flag:newArticle.getProductFlags()){
+	    	assertTrue(articleOne.getProductFlags().contains(flag));
+	    }
   }
 
   /**
@@ -158,8 +197,12 @@ public class ArticlePersistenceTests {
    * Tests if a flag can be removed and if change can be persisted
    */
   @Test
-  public void testRemoveFlag() {
-    fail("Not yet implemented");
+  public void testRemoveProductFlag() {
+	  articleOne.persist();
+	  articleOne.removeFlag(flags.get(0));
+	  articleOne.persist();
+	  IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	  assertFalse(newArticle.getProductFlags().contains(flags.get(0)));
   }
 
 
