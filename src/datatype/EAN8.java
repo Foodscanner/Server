@@ -12,7 +12,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  */
 public class EAN8 implements IEAN{
   
-  long ean13;
+  long ean8;
   
   /**
    * Standard constructor for the EAN
@@ -62,7 +62,7 @@ public class EAN8 implements IEAN{
    */
   public void setEan(long ean) throws NumberInvalidFormatException{
     if(isValid(ean)){
-      ean13 = ean;
+      ean8 = ean;
     }
     else throw new NumberInvalidFormatException("This is not a valid EAN!");
   }
@@ -72,7 +72,7 @@ public class EAN8 implements IEAN{
  * Returns the value of the EAN as long
  */
 public long getEAN() {
-	return ean13;
+	return ean8;
 }
   
   
