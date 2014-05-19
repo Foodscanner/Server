@@ -51,17 +51,20 @@ public class FlagTest {
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");
+		assertEquals(test1.getId(), 1);
 	}
 
 	@Test
 	public void testSetId() {
-
+		int randomID = 2;
+		// assertEquals(test1.getId(), randomID);
+		test1.setId(2);
+		assertEquals(test1.getId(), randomID);
 	}
 
 	@Test
 	public void testGetName() {
-		fail("Not yet implemented");
+		assertEquals(test1.getName(), "Lactose");
 	}
 
 	@Test
