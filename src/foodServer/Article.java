@@ -1,21 +1,16 @@
 package foodServer;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
  * An Article implementation
- * @author Christian Gläser, Felipe Oehrwald
- *
+ * 
+ * @author Christian Glï¿½ser, Felipe Oehrwald
+ * 
  */
 public class Article implements IArticle {
 
@@ -27,34 +22,39 @@ public class Article implements IArticle {
 
 	private URI imageURI;
 	private List<IIngredient> ingredients;
-	
+
 	private List<IFlag> flags;
 
-	
-	
 	/**
 	 * Constructor of an article with parameter id
-	 * @param ean The ean to set
-	 * @throws NumberInvalidFormatException This exception is thrown if number is not a valid EAN. Use EAN validation from datatypes/EAN13 to prevent exception
+	 * 
+	 * @param ean
+	 *            The ean to set
+	 * @throws NumberInvalidFormatException
+	 *             This exception is thrown if number is not a valid EAN. Use
+	 *             EAN validation from datatypes/EAN13 to prevent exception
 	 * 
 	 */
-	public Article(IEAN ean) throws NumberInvalidFormatException { 
+	public Article(IEAN ean) throws NumberInvalidFormatException {
 		id = ean;
 	}
 
 	/**
 	 * Gets the id of the Article as long
+	 * 
 	 * @see foodServer.IArticle#getID()
 	 * 
 	 */
 	public IEAN getID() {
 		return id;
 	}
-	
+
 	/**
 	 * If aId is a valid id, it is set as new id
+	 * 
 	 * @see foodServer.IArticle#setID(IEAN ean)
-	 * @param ean The ean to set
+	 * @param ean
+	 *            The ean to set
 	 */
 	public void setID(IEAN ean) {
 		id = ean;
@@ -69,8 +69,8 @@ public class Article implements IArticle {
 	}
 
 	/**
-	 * @see foodServer.IArticle#setName(java.lang.String)
-	 * Sets the name of the article
+	 * @see foodServer.IArticle#setName(java.lang.String) Sets the name of the
+	 *      article
 	 */
 	public void setName(String aName) {
 		this.name = aName;
@@ -85,16 +85,15 @@ public class Article implements IArticle {
 	}
 
 	/**
-	 * @see foodServer.IArticle#setDescription(java.lang.String)
-	 * Sets the description in the Article
+	 * @see foodServer.IArticle#setDescription(java.lang.String) Sets the
+	 *      description in the Article
 	 */
 	public void setDescription(String aDescription) {
 		this.description = aDescription;
 	}
 
 	/**
-	 * @see foodServer.IArticle#getImageURI()
-	 * Gets the image URI
+	 * @see foodServer.IArticle#getImageURI() Gets the image URI
 	 **/
 	public URI getImageURI() {
 		// URI is immutable
@@ -102,88 +101,81 @@ public class Article implements IArticle {
 	}
 
 	/**
-	 * @see foodServer.IArticle#setImageURI(java.net.URI)
-	 * Sets the URI of the image
+	 * @see foodServer.IArticle#setImageURI(java.net.URI) Sets the URI of the
+	 *      image
 	 */
 	public void setImageURI(URI aImageURI) {
 		// TODO Logic check
 		this.imageURI = aImageURI;
 	}
 
-
-
-	/*setIngredients(List<IIngredient> aIIngredient) {
-		throw new UnsupportedOperationException();
-	}*/
+	/*
+	 * setIngredients(List<IIngredient> aIIngredient) { throw new
+	 * UnsupportedOperationException(); }
+	 */
 
 	/**
-	 * @see foodServer.IArticle#getFlags()
-	 * Returns a list of all flags
+	 * @see foodServer.IArticle#getFlags() Returns a list of all flags
 	 */
 	public List<IFlag> getFlags() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
-	 * @see foodServer.IArticle#addFlag(foodServer.IFlag)
-	 * Adds a product specific flag
+	 * @see foodServer.IArticle#addFlag(foodServer.IFlag) Adds a product
+	 *      specific flag
 	 */
 	public void addFlag(IFlag aFlag) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
-	 * @see foodServer.IArticle#removeFlag(foodServer.IFlag)
-	 * Removes a product specific flag. If flag doesn't exist, request is ignored
+	 * @see foodServer.IArticle#removeFlag(foodServer.IFlag) Removes a product
+	 *      specific flag. If flag doesn't exist, request is ignored
 	 */
 	public void removeFlag(IFlag aFlag) {
 		flags.remove(aFlag);
 	}
 
 	/**
-	 * @see foodServer.IArticle#getProductFlags()
-	 * Returns the product specific flags. Logically, this is a subset of all flags
+	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
+	 *      flags. Logically, this is a subset of all flags
 	 */
 	public List<IFlag> getProductFlags() {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
-	 * @see foodServer.IArticle#getIngredients()
-	 * Returns a list of ingredients
+	 * @see foodServer.IArticle#getIngredients() Returns a list of ingredients
 	 */
 	public List<IIngredient> getIngredients() {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	/**
-	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient)
-	 * Adds an ingredient
+	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient) Adds an
+	 *      ingredient
 	 */
 	public void addIngredient(IIngredient aIIngredient) {
 		// TODO Auto-generated method stub
 	}
-	
+
 	/**
-	 * @see foodServer.IArticle#removeIngredient(foodServer.IIngredient)
-	 * Removes an ingredient
+	 * @see foodServer.IArticle#removeIngredient(foodServer.IIngredient) Removes
+	 *      an ingredient
 	 */
 	public void removeIngredient(IIngredient ingredient) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
-	 * @see foodServer.IArticle#persist()
-	 * If article is new, new article is inserted in database. Else, if there have been changes, the article is updated
+	 * @see foodServer.IArticle#persist() If article is new, new article is
+	 *      inserted in database. Else, if there have been changes, the article
+	 *      is updated
 	 */
 	public void persist() {
 		// TODO Auto-generated method stub
 	}
-
-
-
-
-
 
 }

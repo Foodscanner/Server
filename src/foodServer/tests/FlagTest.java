@@ -1,75 +1,108 @@
 package foodServer.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 //TODO Task assigned to Felipe
+//TODO INFORMATION FOR ME: Insert constructor in class Flag.java ?
+//TODO What description do we have for ID?
+import foodServer.Flag;
+
+/**
+ * Tests for the {@link Flag}
+ * 
+ * @author Felipe Oehrwald
+ * @version 1.0
+ * 
+ * 
+ * 
+ */
 public class FlagTest {
 
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {}
+	Flag test1;
+	Flag test2;
 
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {}
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 
-  @Before
-  public void setUp() throws Exception {}
+	}
 
-  @After
-  public void tearDown() throws Exception {}
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
 
-  @Test
-  public void testGetId() {
-    fail("Not yet implemented");
-  }
+	@Before
+	public void setUp() throws Exception {
+		test1 = new Flag();
+		test1.setId(1);
+		test1.setName("Lactose");
+		test1.setDescription("Handelsklasse A");
+	}
 
-  @Test
-  public void testSetId() {
-    fail("Not yet implemented");
-  }
+	@After
+	public void tearDown() throws Exception {
+	}
 
-  @Test
-  public void testGetName() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testGetId() {
+		fail("Not yet implemented");
+	}
 
-  @Test
-  public void testSetName() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testSetId() {
 
-  @Test
-  public void testGetDescription() {
-    fail("Not yet implemented");
-  }
+	}
 
-  @Test
-  public void testSetDescription() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testGetName() {
+		fail("Not yet implemented");
+	}
 
-  @Test
-  public void testGetLimitToProduct() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testSetName() {
+		assertEquals(test1.getName(), "Lactose");
+		test1.setName("Lactase");
+		assertEquals(test1.getName(), "Lactase");
+	}
 
-  @Test
-  public void testSetLimitToProduct() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testGetDescription() {
+		assertEquals(test1.getDescription(), "Handelsklasse A");
 
-  @Test
-  public void testCopy() {
-    fail("Not yet implemented");
-  }
+	}
 
-  @Test
-  public void testPersist() {
-    fail("Not yet implemented");
-  }
+	@Test
+	public void testSetDescription() {
+		// assertEquals(test1.getDescription(), "Handelsklasse A");
+		// test1.setDescription("Handelsklasse B");
+		//
+
+	}
+
+	@Test
+	public void testGetLimitToProduct() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSetLimitToProduct() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testCopy() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testPersist() {
+		fail("Not yet implemented");
+	}
 
 }
