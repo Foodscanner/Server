@@ -1,7 +1,11 @@
 package foodServer.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -41,8 +45,8 @@ public class FlagTest {
 	public void setUp() throws Exception {
 		test1 = new Flag();
 		test1.setId(1);
-		test1.setName("Lactose");
-		test1.setDescription("Handelsklasse A");
+		test1.setName("Lactose");// Das ist richtig
+		test1.setDescription("Handelsklasse A"); // auch richitg
 	}
 
 	@After
@@ -82,30 +86,45 @@ public class FlagTest {
 
 	@Test
 	public void testSetDescription() {
-		// assertEquals(test1.getDescription(), "Handelsklasse A");
-		// test1.setDescription("Handelsklasse B");
-		//
+		assertEquals(test1.getDescription(), "Handelsklasse A");
+		test1.setDescription("Handelsklasse B");
 
 	}
 
-	@Test
-	public void testGetLimitToProduct() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetLimitToProduct() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCopy() {
-		fail("Not yet implemented");
-	}
+	//
+	// @Test
+	// public void testGetLimitToProduct() {
+	// fail("Not yet implemented");
+	// }
+	//
+	// @Test
+	// public void testSetLimitToProduct() {
+	// fail("Not yet implemented");
+	// }
 
 	@Test
-	public void testPersist() {
-		fail("Not yet implemented");
+	public void testdeepCopy() throws Exception {
+
+		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
+				"object.dat"));
+		out.writeObject(test1);
+		out.close();
+
+		ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+				"object.dat"));
+		Flag flagtemp = (Flag) in.readObject();
+		in.close();
+
+		// System.out.println(test1);
+		// System.out.println(flagtemp);
+
+		assertEquals(test1, flagtemp);
+
 	}
+
+	// @Test
+	// public void testPersist() {
+	// fail("Not yet implemented");
+	// }
 
 }
