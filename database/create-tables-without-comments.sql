@@ -10,14 +10,14 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql Type: EXTENSION Schema: - Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql Type: COMMENT Schema: - Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -30,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: Ingredient_Flags; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Ingredient_Flags Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Ingredient_Flags" (
@@ -39,10 +39,10 @@ CREATE TABLE "Ingredient_Flags" (
 );
 
 
-ALTER TABLE public."Ingredient_Flags" OWNER TO postgres;
+ALTER TABLE public."Ingredient_Flags" OWNER TO postgres
 
 --
--- Name: 2_FlagID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: 2_FlagID_seq Type: SEQUENCE Schema: public Owner: postgres
 --
 
 CREATE SEQUENCE "2_FlagID_seq"
@@ -53,17 +53,17 @@ CREATE SEQUENCE "2_FlagID_seq"
     CACHE 1;
 
 
-ALTER TABLE public."2_FlagID_seq" OWNER TO postgres;
+ALTER TABLE public."2_FlagID_seq" OWNER TO postgres
 
 --
--- Name: 2_FlagID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: 2_FlagID_seq Type: SEQUENCE OWNED BY Schema: public Owner: postgres
 --
 
 ALTER SEQUENCE "2_FlagID_seq" OWNED BY "Ingredient_Flags"."FK_FlagID";
 
 
 --
--- Name: 2_IngredientID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: 2_IngredientID_seq Type: SEQUENCE Schema: public Owner: postgres
 --
 
 CREATE SEQUENCE "2_IngredientID_seq"
@@ -77,14 +77,14 @@ CREATE SEQUENCE "2_IngredientID_seq"
 ALTER TABLE public."2_IngredientID_seq" OWNER TO postgres;
 
 --
--- Name: 2_IngredientID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: 2_IngredientID_seq Type: SEQUENCE OWNED BY Schema: public Owner: postgres
 --
 
 ALTER SEQUENCE "2_IngredientID_seq" OWNED BY "Ingredient_Flags"."FK_IngredientID";
 
 
 --
--- Name: Article; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Article Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Article" (
@@ -98,7 +98,7 @@ CREATE TABLE "Article" (
 ALTER TABLE public."Article" OWNER TO postgres;
 
 --
--- Name: TABLE "Article"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: TABLE "Article" Type: COMMENT Schema: public Owner: postgres
 --
 
 COMMENT ON TABLE "Article" IS 'private IEAN id;
@@ -111,7 +111,7 @@ private List<IFlag> flags;
 
 
 --
--- Name: Article_Flags; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Article_Flags Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Article_Flags" (
@@ -123,7 +123,7 @@ CREATE TABLE "Article_Flags" (
 ALTER TABLE public."Article_Flags" OWNER TO postgres;
 
 --
--- Name: Article_Ingredients; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Article_Ingredients Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Article_Ingredients" (
@@ -135,7 +135,7 @@ CREATE TABLE "Article_Ingredients" (
 ALTER TABLE public."Article_Ingredients" OWNER TO postgres;
 
 --
--- Name: Flag; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Flag Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Flag" (
@@ -149,14 +149,14 @@ CREATE TABLE "Flag" (
 ALTER TABLE public."Flag" OWNER TO postgres;
 
 --
--- Name: TABLE "Flag"; Type: COMMENT; Schema: public; Owner: postgres
+-- Name: TABLE "Flag" Type: COMMENT Schema: public Owner: postgres
 --
 
 COMMENT ON TABLE "Flag" IS 'Flags';
 
 
 --
--- Name: Ingredient; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Ingredient Type: TABLE Schema: public Owner: postgres Tablespace: 
 --
 
 CREATE TABLE "Ingredient" (
@@ -168,7 +168,7 @@ CREATE TABLE "Ingredient" (
 ALTER TABLE public."Ingredient" OWNER TO postgres;
 
 --
--- Name: Ingredient_ID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: Ingredient_ID_seq Type: SEQUENCE Schema: public Owner: postgres
 --
 
 CREATE SEQUENCE "Ingredient_ID_seq"
@@ -182,14 +182,14 @@ CREATE SEQUENCE "Ingredient_ID_seq"
 ALTER TABLE public."Ingredient_ID_seq" OWNER TO postgres;
 
 --
--- Name: Ingredient_ID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: Ingredient_ID_seq Type: SEQUENCE OWNED BY Schema: public Owner: postgres
 --
 
 ALTER SEQUENCE "Ingredient_ID_seq" OWNED BY "Ingredient"."ID";
 
 
 --
--- Name: flag_ID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: flag_ID_seq Type: SEQUENCE Schema: public Owner: postgres
 --
 
 CREATE SEQUENCE "flag_ID_seq"
@@ -203,92 +203,58 @@ CREATE SEQUENCE "flag_ID_seq"
 ALTER TABLE public."flag_ID_seq" OWNER TO postgres;
 
 --
--- Name: flag_ID_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: flag_ID_seq Type: SEQUENCE OWNED BY Schema: public Owner: postgres
 --
 
 ALTER SEQUENCE "flag_ID_seq" OWNED BY "Flag"."ID";
 
 
 --
--- Name: ID; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: ID Type: DEFAULT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Flag" ALTER COLUMN "ID" SET DEFAULT nextval('"flag_ID_seq"'::regclass);
 
 
 --
--- Name: ID; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name: ID Type: DEFAULT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Ingredient" ALTER COLUMN "ID" SET DEFAULT nextval('"Ingredient_ID_seq"'::regclass);
 
 
 --
--- Name: 2_FlagID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: 2_FlagID_seq Type: SEQUENCE SET Schema: public Owner: postgres
 --
 
 SELECT pg_catalog.setval('"2_FlagID_seq"', 1, false);
 
 
 --
--- Name: 2_IngredientID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: 2_IngredientID_seq Type: SEQUENCE SET Schema: public Owner: postgres
 --
 
 SELECT pg_catalog.setval('"2_IngredientID_seq"', 1, false);
 
 
---
--- Data for Name: Article; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
 
 
 --
--- Data for Name: Article_Flags; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: Article_Ingredients; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: Flag; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: Ingredient; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: Ingredient_Flags; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Name: Ingredient_ID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: Ingredient_ID_seq Type: SEQUENCE SET Schema: public Owner: postgres
 --
 
 SELECT pg_catalog.setval('"Ingredient_ID_seq"', 1, false);
 
 
 --
--- Name: flag_ID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: flag_ID_seq Type: SEQUENCE SET Schema: public Owner: postgres
 --
 
 SELECT pg_catalog.setval('"flag_ID_seq"', 1, false);
 
 
 --
--- Name: 2_FlagID_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: 2_FlagID_key Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Ingredient_Flags"
@@ -296,7 +262,7 @@ ALTER TABLE ONLY "Ingredient_Flags"
 
 
 --
--- Name: 2_IngredientID_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: 2_IngredientID_key Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Ingredient_Flags"
@@ -304,7 +270,7 @@ ALTER TABLE ONLY "Ingredient_Flags"
 
 
 --
--- Name: ArticleIngredientPKConstraint; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: ArticleIngredientPKConstraint Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Article_Ingredients"
@@ -312,7 +278,7 @@ ALTER TABLE ONLY "Article_Ingredients"
 
 
 --
--- Name: Article_FlagPK; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Article_FlagPK Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Article_Flags"
@@ -320,7 +286,7 @@ ALTER TABLE ONLY "Article_Flags"
 
 
 --
--- Name: Article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Article_pkey Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Article"
@@ -328,7 +294,7 @@ ALTER TABLE ONLY "Article"
 
 
 --
--- Name: Ingredient_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: Ingredient_pkey Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Ingredient"
@@ -336,7 +302,7 @@ ALTER TABLE ONLY "Ingredient"
 
 
 --
--- Name: flag_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- Name: flag_pkey Type: CONSTRAINT Schema: public Owner: postgres Tablespace: 
 --
 
 ALTER TABLE ONLY "Flag"
@@ -344,7 +310,7 @@ ALTER TABLE ONLY "Flag"
 
 
 --
--- Name: Article_Flags_FK_FlagID_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Article_Flags_FK_FlagID_fkey Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Article_Flags"
@@ -352,7 +318,7 @@ ALTER TABLE ONLY "Article_Flags"
 
 
 --
--- Name: FK_ArticleID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_ArticleID Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Article_Ingredients"
@@ -360,7 +326,7 @@ ALTER TABLE ONLY "Article_Ingredients"
 
 
 --
--- Name: FK_ArticleID_Constraint; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_ArticleID_Constraint Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Article_Flags"
@@ -368,7 +334,7 @@ ALTER TABLE ONLY "Article_Flags"
 
 
 --
--- Name: FK_Flag; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_Flag Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Ingredient_Flags"
@@ -376,7 +342,7 @@ ALTER TABLE ONLY "Ingredient_Flags"
 
 
 --
--- Name: FK_Ingredient; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_Ingredient Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Ingredient_Flags"
@@ -384,7 +350,7 @@ ALTER TABLE ONLY "Ingredient_Flags"
 
 
 --
--- Name: FK_IngredientID; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: FK_IngredientID Type: FK CONSTRAINT Schema: public Owner: postgres
 --
 
 ALTER TABLE ONLY "Article_Ingredients"
@@ -392,7 +358,7 @@ ALTER TABLE ONLY "Article_Ingredients"
 
 
 --
--- Name: public; Type: ACL; Schema: -; Owner: foodscanner
+-- Name: public Type: ACL Schema: - Owner: foodscanner
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
