@@ -110,7 +110,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetID() throws NumberInvalidFormatException {
-    articleOne.persist();
+    //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(ean1);
     assertEquals(articleOne.getID(),newArticle.getID());
   }
@@ -124,7 +124,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetName() throws NumberInvalidFormatException {
-    articleOne.persist();
+    //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getName(),newArticle.getName());
   }
@@ -136,7 +136,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetDescription() throws NumberInvalidFormatException {
-    articleOne.persist();
+    //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getDescription(),newArticle.getDescription());
   }
@@ -148,7 +148,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetImageURI() throws NumberInvalidFormatException {
-    articleOne.persist();
+    //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getImageURI(),newArticle.getImageURI());
   }
@@ -159,7 +159,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetIngredients() {
-	    articleOne.persist();
+	    //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IIngredient ingredient:newArticle.getIngredients()){
 	    	assertTrue(articleOne.getIngredients().contains(ingredient));
@@ -172,7 +172,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetFlags() {
-	  articleOne.persist();
+	  //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IFlag flag:newArticle.getFlags()){
 	    	assertTrue(articleOne.getFlags().contains(flag));
@@ -185,7 +185,7 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testGetProductFlags() {
-	  articleOne.persist();
+	  //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IFlag flag:newArticle.getProductFlags()){
 	    	assertTrue(articleOne.getProductFlags().contains(flag));
@@ -198,9 +198,9 @@ public class ArticlePersistenceTests {
    */
   @Test
   public void testRemoveProductFlag() {
-	  articleOne.persist();
+	  //articleOne.persist();
 	  articleOne.removeFlag(flags.get(0));
-	  articleOne.persist();
+	  //articleOne.persist();
 	  IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	  assertFalse(newArticle.getProductFlags().contains(flags.get(0)));
   }
