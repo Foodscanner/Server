@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductServlet
+ * Servlet implementation class XMLProductServlet
  */
-@WebServlet(description = "Connector from Server to classes", urlPatterns = { "/ProductServlet" })
-public class ProductServlet extends HttpServlet {
+@WebServlet(description = "Connector from Server to classes", urlPatterns = { "/ProductInformation.html" })
+public class HTMLProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductServlet() {
+    public HTMLProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,6 @@ public class ProductServlet extends HttpServlet {
     		   {
     	String id = request.getParameter("id");
     	PrintWriter pwriter=response.getWriter();
-    	           if(request.getParameter("type").equals("html")){
     		       response.setContentType("text/html");
     		       
 
@@ -44,13 +43,6 @@ public class ProductServlet extends HttpServlet {
     		       //id-->convert to long
     		       //
     		       pwriter.println("Requested id is="+id);
-    	           }
-    	           else if(request.getParameter("type").equals("xml")){
-    	        	   response.setContentType("content/xml");
-    	        	   pwriter.println(IOUtils.getArticle(1L));
-    	           }
-    	           
-    	           
     		       pwriter.close();
     		   }
 
