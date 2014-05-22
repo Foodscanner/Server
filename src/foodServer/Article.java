@@ -25,6 +25,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
 public class Article implements IArticle {
 
 	private IEAN id;
+	private long lid;
 
 	private String name;
 
@@ -49,6 +50,7 @@ public class Article implements IArticle {
 	
 	public Article(IEAN ean) throws NumberInvalidFormatException {
 		id = ean;
+		lid = ean.getEAN();
 	}
 
 	/**
@@ -57,11 +59,18 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getID()
 	 * 
 	 */
+	public IEAN getID() {
+		return this.id;
+	}
+	
+	/**
+	 * @return the value of the id as long
+	 */
 	@Id
 	@Column(name = "ID", nullable=false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public IEAN getID() {
-		return this.id;
+	public long getIDasLong(){
+		return this.getID().getEAN();
 	}
 
 	/**
@@ -112,12 +121,15 @@ public class Article implements IArticle {
 	/**
 	 * @see foodServer.IArticle#getImageURI() Gets the image URI
 	 **/
-	@Column(name="URI")
 	public URI getImageURI() {
 		// URI is immutable
 		return this.imageURI;
 	}
 
+	@Column(name="URI")
+	public String getImageURIAsString(){
+		return this.getImageURI().toString();
+	}
 	/**
 	 * @see foodServer.IArticle#setImageURI(java.net.URI) Sets the URI of the
 	 *      image
