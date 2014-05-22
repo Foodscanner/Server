@@ -29,11 +29,7 @@
     	<artifactId>postgresql</artifactId>
     	<version>9.3-1100-jdbc41</version>
     </dependency>
-    <dependency>
-    	<groupId>org.apache.tomcat</groupId>
-    	<artifactId>tomcat-catalina</artifactId>
-    	<version>8.0.5</version>
-    </dependency>
+    
     <dependency>
         <groupId>com.sun.faces</groupId>
         <artifactId>jsf-api</artifactId>
