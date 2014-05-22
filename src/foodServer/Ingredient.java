@@ -6,7 +6,12 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
+
+//TODO MappedByMethod for Article
 /**
  * Ingredients consist of names and {@link IFlag}s
  * 
@@ -25,7 +30,7 @@ public class Ingredient implements IIngredient {
 	}
 
 	@Id
-	@Column(name = "Ingrendient_ID", nullable = false)
+	@Column(name = "ID", nullable = false)
 	public int getId() {
 		return this.id;
 	}
@@ -34,7 +39,7 @@ public class Ingredient implements IIngredient {
 		this.id = aId;
 	}
 
-	@Column(name = "Ingrendient_Name")
+	@Column(name = "Name")
 	public String getName() {
 		return this.name;
 	}
@@ -51,6 +56,10 @@ public class Ingredient implements IIngredient {
 		flags.remove(flag);
 	}
 
+	@ManyToMany
+	@JoinTable(name="Ingredient_Flags",
+	joinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"),
+	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<IFlag> getFlags() {
 		// returns a new list to prevent modification of list of flags within
 		// ingredients. The flags itself should be modifiable

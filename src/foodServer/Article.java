@@ -3,6 +3,16 @@ package foodServer;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import org.hibernate.annotations.Generated;
+
 import datatype.IEAN;
 import foodServer.exceptions.NumberInvalidFormatException;
 
@@ -35,6 +45,8 @@ public class Article implements IArticle {
 	 *             EAN validation from datatypes/EAN13 to prevent exception
 	 * 
 	 */
+	
+	
 	public Article(IEAN ean) throws NumberInvalidFormatException {
 		id = ean;
 	}
@@ -45,8 +57,11 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getID()
 	 * 
 	 */
+	@Id
+	@Column(name = "ID", nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public IEAN getID() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -57,13 +72,14 @@ public class Article implements IArticle {
 	 *            The ean to set
 	 */
 	public void setID(IEAN ean) {
-		id = ean;
+		this.id = ean;
 	}
 
 	/**
 	 * @see foodServer.IArticle#getName()
 	 * @return The name of the article
 	 */
+	@Column(name="Name")
 	public String getName() {
 		return this.name;
 	}
@@ -80,6 +96,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getDescription()
 	 * @return A description
 	 */
+	@Column(name="Description")
 	public String getDescription() {
 		return this.description;
 	}
@@ -95,6 +112,7 @@ public class Article implements IArticle {
 	/**
 	 * @see foodServer.IArticle#getImageURI() Gets the image URI
 	 **/
+	@Column(name="URI")
 	public URI getImageURI() {
 		// URI is immutable
 		return this.imageURI;
@@ -117,6 +135,10 @@ public class Article implements IArticle {
 	/**
 	 * @see foodServer.IArticle#getFlags() Returns a list of all flags
 	 */
+	@ManyToMany
+	@JoinTable(name="Article_Flags",
+	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
+	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<IFlag> getFlags() {
 		throw new UnsupportedOperationException();
 	}
@@ -148,6 +170,10 @@ public class Article implements IArticle {
 	/**
 	 * @see foodServer.IArticle#getIngredients() Returns a list of ingredients
 	 */
+	@ManyToMany
+	@JoinTable(name="Article_Ingredients",
+	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
+	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))
 	public List<IIngredient> getIngredients() {
 		throw new UnsupportedOperationException();
 	}

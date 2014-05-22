@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//TODO Felipe Oehrwald
+//TODO MappedByMethod for Article & Ingredient
 /**
  * Allergy flags for {@link Article}
  * 
@@ -75,7 +77,8 @@ public class Flag implements IFlag, Serializable {
 	private boolean limitToProduct;
 
 	@Id
-	@Column(name = "Flag_ID", nullable = false)
+	@Column(name = "ID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return this.id;
 	}
@@ -84,7 +87,7 @@ public class Flag implements IFlag, Serializable {
 		this.id = aId;
 	}
 
-	@Column(name = "Flag_Name")
+	@Column(name = "Name")
 	public String getName() {
 		return this.name;
 	}
@@ -93,7 +96,7 @@ public class Flag implements IFlag, Serializable {
 		this.name = aName;
 	}
 
-	@Column(name = "Flag_Description")
+	@Column(name = "Description")
 	public String getDescription() {
 		return this.description;
 	}
@@ -115,9 +118,4 @@ public class Flag implements IFlag, Serializable {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	public void persist() {
-		// TODO Auto-generated method stub
-	}
-
 }

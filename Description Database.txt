@@ -1,0 +1,20 @@
+10 Ingredients, 10 Flags
+
+
+Flags:
+Name
+Description
+
+Ingredients:
+Name
+Description
+Flags
+
+Article Bread -->Ingredient [wheat, milk, sourdough, water, salt]
+
+Ingredient wheat --> Flag: Gluten
+Ingredient salt --> Flag: Salty
+Ingredient milk --> Flag: Lactose
+
+Article Gummibärchen --> Ingredient...
+

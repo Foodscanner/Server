@@ -55,9 +55,5 @@ public interface IFlag{
 	 * @return A copy of the flag
 	 */
 	public IFlag copy();
-	
-	/**
-	 * Persists changes or saves object as new object into database using an ORM
-	 */
-	public void persist();
+
 }
