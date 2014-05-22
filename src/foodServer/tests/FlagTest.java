@@ -104,6 +104,7 @@ public class FlagTest {
 
 	@Test
 	public void testdeepCopy() throws Exception {
+chdhdhgdhgdhg
 
 		ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
 				"object.dat"));
@@ -121,5 +122,4 @@ public class FlagTest {
 		assertEquals(test1, flagtemp);
 
 	}
-
 }
