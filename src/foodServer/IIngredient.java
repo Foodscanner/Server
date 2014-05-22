@@ -24,11 +24,5 @@ public interface IIngredient {
   public void setName(String aName);
   
   public IIngredient copy();
-  
-  /**
-   * Persists the Ingredient
-   */
-  public void persist();
-
 
 }

@@ -156,8 +156,8 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient) Adds an
 	 *      ingredient
 	 */
-	public void addIngredient(IIngredient aIIngredient) {
-		// TODO Auto-generated method stub
+	public void addIngredient(IIngredient ingredient) {
+		ingredients.add(ingredient);
 	}
 
 	/**
@@ -165,17 +165,6 @@ public class Article implements IArticle {
 	 *      an ingredient
 	 */
 	public void removeIngredient(IIngredient ingredient) {
-		// TODO Auto-generated method stub
-
+		ingredients.remove(ingredient);
 	}
-
-	/**
-	 * @see foodServer.IArticle#persist() If article is new, new article is
-	 *      inserted in database. Else, if there have been changes, the article
-	 *      is updated
-	 */
-	public void persist() {
-		// TODO Auto-generated method stub
-	}
-
 }

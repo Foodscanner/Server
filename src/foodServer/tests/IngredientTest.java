@@ -117,10 +117,6 @@ public class IngredientTest {
   public void testCopy() {
     fail("Not yet implemented");
   }
-
-  @Test
-  public void testPersist() {
-    fail("Not yet implemented");
-  }
-
+  
+  
 }

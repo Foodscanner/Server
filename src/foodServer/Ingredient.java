@@ -81,10 +81,4 @@ public class Ingredient implements IIngredient {
 
 	}
 
-	public void persist() {
-		// if id is null = new article
-		// else update
-		// TODO Auto-generated method stub
-	}
-
 }

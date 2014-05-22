@@ -82,10 +82,6 @@ public interface IArticle {
      * @param ingredient The ingredient to remove
      */
     public void removeIngredient(IIngredient ingredient);
-    
-
-	public void persist();
-	
 	
 
 

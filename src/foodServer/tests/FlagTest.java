@@ -122,9 +122,4 @@ public class FlagTest {
 
 	}
 
-	// @Test
-	// public void testPersist() {
-	// fail("Not yet implemented");
-	// }
-
 }
