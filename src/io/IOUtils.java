@@ -25,10 +25,16 @@ public class IOUtils {
 	 * @throws NumberInvalidFormatException
 	 */
 	public static String getArticle(long ID) {
+		String returnString = null;
+		XStream serializer = new XStream();
+		returnString = serializer.toXML(getStandardExchangeArticle(ID));
+		return returnString;
+	}
+	
+	public static StandardExchangeArticle getStandardExchangeArticle(long ID){
 		StandardExchangeArticle sea = new StandardExchangeArticle();
 		sea.ID = ID;
-		String returnString = null;
-
+		
 		try {
 			IEAN iean = new EAN13(ID);
 			IArticle article = ArticleUtil.getArticle(iean);
@@ -48,10 +54,7 @@ public class IOUtils {
 			sea.name = "File corruption!";
 			sea.description = "Received EAN is invalid due to file corruption during transmission - please try again!";
 		}
-
-		XStream serializer = new XStream();
-		returnString = serializer.toXML(sea);
-		return returnString;
+		return sea;
 	}
 	
 	public static StandardExchangeArticle deserializeStandardArticle(String xml){
