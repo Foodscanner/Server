@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class StandardExchangeArticle {
 public long ID;
 public String name;
-public String describtion;
+public String description;
 public URI pictureURI;
 public HashMap<Integer, String> flags;
 }

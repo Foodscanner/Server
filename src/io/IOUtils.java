@@ -34,11 +34,11 @@ public class IOUtils {
 			IArticle article = ArticleUtil.getArticle(iean);
 			if (article == null) {
 				sea.name = "No such article!";
-				sea.describtion = "Article does not exist in database!";
+				sea.description = "Article does not exist in database!";
 			}
 			// Packaging information into ExchangeArticle
 			sea.name = article.getName();
-			sea.describtion = article.getDescription();
+			sea.description = article.getDescription();
 			sea.pictureURI = article.getImageURI();
 			sea.flags = new HashMap<Integer, String>();
 			for (IFlag flag : article.getFlags()) {
@@ -46,7 +46,7 @@ public class IOUtils {
 			}
 		} catch (NumberInvalidFormatException ex) {
 			sea.name = "File corruption!";
-			sea.describtion = "Received EAN is invalid due to file corruption during transmission - please try again!";
+			sea.description = "Received EAN is invalid due to file corruption during transmission - please try again!";
 		}
 
 		XStream serializer = new XStream();
