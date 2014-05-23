@@ -1,5 +1,8 @@
 package io;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import com.thoughtworks.xstream.XStream;
 
 import datatype.EAN13;
@@ -47,6 +50,11 @@ public class IOUtils {
 			if (article == null) {
 				sea.setName("No Article!");
 				sea.setDescription("Article does not exist in database!");
+				try {
+					sea.setPictureURI(new URI("https://openclipart.org/image/300px/svg_to_png/17139/barthm8s_Heiko-Barth_FAQ_128x128.png"));
+				} catch (URISyntaxException e) {
+					//URI invalid
+				}
 			}
 			// Packaging information into ExchangeArticle
 			sea.setName(article.getName());
