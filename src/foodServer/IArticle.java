@@ -11,7 +11,7 @@ import datatype.IEAN;
  * @author Christian Gläser
  *
  */
-public interface IArticle<F,I> {
+public interface IArticle {
 	
 	
 	//ID
@@ -58,30 +58,30 @@ public interface IArticle<F,I> {
 	 * Adds a product-specific flag
 	 * @param aFlag A flag that should be added to IArticle
 	 */
-	public void addFlag(F aFlag);
+	public void addFlag(IFlag aFlag);
 
 	/**
 	 * Removes a product-specific flag
 	 * @param aFlag A flag that should be removed from IArticle
 	 */
-	public void removeFlag(F aFlag);
+	public void removeFlag(IFlag aFlag);
 	
-	public List<F> getFlags();
+	public List<IFlag> getFlags();
 	
-	public List<F> getProductFlags();
+	public List<IFlag> getProductFlags();
 	
 	//Ingredients
-	public List<I> getIngredients();
+	public List<IIngredient> getIngredients();
 	
     /**
      * @param ingredient The ingredient to add
      */
-    public void addIngredient(I ingredient);
+    public void addIngredient(IIngredient ingredient);
     
     /**
      * @param ingredient The ingredient to remove
      */
-    public void removeIngredient(I ingredient);
+    public void removeIngredient(IIngredient ingredient);
 	
 
 

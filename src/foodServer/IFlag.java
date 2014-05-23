@@ -5,7 +5,7 @@ package foodServer;
  * @author Christian Gläser
  *
  */
-public interface IFlag<F>{
+public interface IFlag{
 
 	/**
 	 * @param aId
@@ -54,6 +54,6 @@ public interface IFlag<F>{
 	/**
 	 * @return A copy of the flag
 	 */
-	public F copy();
+	public IFlag copy();
 
 }

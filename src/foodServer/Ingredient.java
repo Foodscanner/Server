@@ -20,13 +20,13 @@ import javax.persistence.ManyToMany;
  * 
  */
 @Entity
-public class Ingredient implements IIngredient<Ingredient,Flag> {
+public class Ingredient implements IIngredient {
 	private int id;
 	private String name;
-	private List<Flag> flags;
+	private List<IFlag> flags;
 
 	public Ingredient() {
-		flags = new ArrayList<Flag>();
+		flags = new ArrayList<IFlag>();
 	}
 
 	@Id
@@ -48,11 +48,11 @@ public class Ingredient implements IIngredient<Ingredient,Flag> {
 		this.name = aName;
 	}
 
-	public void addFlag(Flag flag) {
+	public void addFlag(IFlag flag) {
 		flags.add(flag);
 	}
 
-	public void removeFlag(Flag flag) {
+	public void removeFlag(IFlag flag) {
 		flags.remove(flag);
 	}
 
@@ -60,13 +60,13 @@ public class Ingredient implements IIngredient<Ingredient,Flag> {
 	@JoinTable(name="Ingredient_Flags",
 	joinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
-	public List<Flag> getFlags() {
+	public List<IFlag> getFlags() {
 		// returns a new list to prevent modification of list of flags within
 		// ingredients. The flags itself should be modifiable
 		// therefore this level of deep-copying is sufficient
 		System.out.println("Copying " + flags.size() + " flags");
-		List<Flag> tempFlags = new ArrayList<Flag>();
-		for (Flag flag : this.flags) {
+		List<IFlag> tempFlags = new ArrayList<IFlag>();
+		for (IFlag flag : this.flags) {
 			tempFlags.add(flag.copy());
 		}
 		return tempFlags;

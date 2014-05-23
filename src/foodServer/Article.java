@@ -4,7 +4,6 @@ import java.net.URI;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +22,10 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gl�ser, Felipe Oehrwald
  * 
  */
-@Entity
-public class Article implements IArticle<Flag,Ingredient> {
+public class Article implements IArticle {
 
 	private IEAN id;
+	private long lid;
 
 	private String name;
 
@@ -51,6 +50,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	
 	public Article(IEAN ean) throws NumberInvalidFormatException {
 		id = ean;
+		lid = ean.getEAN();
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	@JoinTable(name="Article_Flags",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
-	public List<Flag> getFlags() {
+	public List<IFlag> getFlags() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -159,7 +159,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	 * @see foodServer.IArticle#addFlag(foodServer.IFlag) Adds a product
 	 *      specific flag
 	 */
-	public void addFlag(Flag aFlag) {
+	public void addFlag(IFlag aFlag) {
 		// TODO Auto-generated method stub
 	}
 
@@ -167,7 +167,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	 * @see foodServer.IArticle#removeFlag(foodServer.IFlag) Removes a product
 	 *      specific flag. If flag doesn't exist, request is ignored
 	 */
-	public void removeFlag(Flag aFlag) {
+	public void removeFlag(IFlag aFlag) {
 		flags.remove(aFlag);
 	}
 
@@ -175,7 +175,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
-	public List<Flag> getProductFlags() {
+	public List<IFlag> getProductFlags() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -186,7 +186,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	@JoinTable(name="Article_Ingredients",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))
-	public List<Ingredient> getIngredients() {
+	public List<IIngredient> getIngredients() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -194,7 +194,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient) Adds an
 	 *      ingredient
 	 */
-	public void addIngredient(Ingredient ingredient) {
+	public void addIngredient(IIngredient ingredient) {
 		ingredients.add(ingredient);
 	}
 
@@ -202,7 +202,7 @@ public class Article implements IArticle<Flag,Ingredient> {
 	 * @see foodServer.IArticle#removeIngredient(foodServer.IIngredient) Removes
 	 *      an ingredient
 	 */
-	public void removeIngredient(Ingredient ingredient) {
+	public void removeIngredient(IIngredient ingredient) {
 		ingredients.remove(ingredient);
 	}
 }
