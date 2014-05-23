@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author Felipe Oehrwald
  * 
  */
-@Entity(name="Flag")
+@Entity
 public class Flag implements IFlag, Serializable {
 
 	@Override

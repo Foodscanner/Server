@@ -4,12 +4,15 @@ import java.net.URI;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+
 
 import org.hibernate.annotations.Generated;
 
@@ -22,6 +25,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gl�ser, Felipe Oehrwald
  * 
  */
+@Entity
 public class Article implements IArticle {
 
 	private IEAN id;
