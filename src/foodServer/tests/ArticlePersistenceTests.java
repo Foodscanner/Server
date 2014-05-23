@@ -21,6 +21,7 @@ import foodServer.IArticle;
 import foodServer.IFlag;
 import foodServer.IIngredient;
 import foodServer.Ingredient;
+import foodServer.exceptions.DatabaseConnectionException;
 import foodServer.exceptions.NumberInvalidFormatException;
 
 public class ArticlePersistenceTests {
@@ -107,9 +108,10 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getID()}.
    * Tests if persisted is equal to id articleOne
    * @throws NumberInvalidFormatException Is thrown if id is not a valid ean
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetID() throws NumberInvalidFormatException {
+  public void testGetID() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(ean1);
     assertEquals(articleOne.getID(),newArticle.getID());
@@ -120,10 +122,11 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getName()}.
    * Tests if persisted name is equal
    * @throws NumberInvalidFormatException Is thrown if number is not a valid EAN
+ * @throws DatabaseConnectionException 
    * 
    */
   @Test
-  public void testGetName() throws NumberInvalidFormatException {
+  public void testGetName() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getName(),newArticle.getName());
@@ -133,9 +136,10 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getDescription()}.
    * Tests if persisted Description is equal
    * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetDescription() throws NumberInvalidFormatException {
+  public void testGetDescription() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getDescription(),newArticle.getDescription());
@@ -145,9 +149,10 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getImageURI()}.
    * Tests if persisted imageURI is equal
    * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetImageURI() throws NumberInvalidFormatException {
+  public void testGetImageURI() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
     IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
     assertEquals(articleOne.getImageURI(),newArticle.getImageURI());
@@ -156,9 +161,10 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getIngredients()}.
    * Tests if all ingredients have been persisted
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetIngredients() {
+  public void testGetIngredients() throws DatabaseConnectionException {
 	    //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IIngredient ingredient:newArticle.getIngredients()){
@@ -169,9 +175,10 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getFlags()}.
    * Tests if all flags can be retrieved
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetFlags() {
+  public void testGetFlags() throws DatabaseConnectionException {
 	  //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IFlag flag:newArticle.getFlags()){
@@ -182,9 +189,10 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getProductFlags()}.
    * Tests if all product specific flag can be retrieved
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testGetProductFlags() {
+  public void testGetProductFlags() throws DatabaseConnectionException {
 	  //articleOne.persist();
 	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
 	    for(IFlag flag:newArticle.getProductFlags()){
@@ -195,9 +203,10 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#removeFlag(foodServer.IFlag)}.
    * Tests if a flag can be removed and if change can be persisted
+ * @throws DatabaseConnectionException 
    */
   @Test
-  public void testRemoveProductFlag() {
+  public void testRemoveProductFlag() throws DatabaseConnectionException {
 	  //articleOne.persist();
 	  articleOne.removeFlag(flags.get(0));
 	  //articleOne.persist();
