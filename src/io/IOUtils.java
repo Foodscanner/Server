@@ -8,6 +8,7 @@ import datatype.StandardExchangeArticle;
 import foodServer.ArticleUtil;
 import foodServer.IArticle;
 import foodServer.IFlag;
+import foodServer.exceptions.DatabaseConnectionException;
 import foodServer.exceptions.NumberInvalidFormatException;
 
 public class IOUtils {
@@ -54,9 +55,12 @@ public class IOUtils {
 			for (IFlag flag : article.getFlags()) {
 				sea.addFlag(flag.getId(), flag.getName());
 			}
-		} catch (NumberInvalidFormatException ex) {
+		} catch (NumberInvalidFormatException NIFEx) {
 			sea.setName("No Article!");
 			sea.setDescription("File corruption! - Received EAN is invalid due to file corruption during transmission - please try again!");
+		}
+		catch (DatabaseConnectionException DCEx){
+			//TODO: retry, then if no change: return error message
 		}
 		return sea;
 	}
