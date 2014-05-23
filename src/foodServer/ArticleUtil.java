@@ -27,7 +27,10 @@ public class ArticleUtil {
 		Article article = null;
 		  //retrieve article from db
 		  //article = ....
-		return article;
+		//temporarily throw DatabaseConnectionException
+		throw new DatabaseConnectionException("Database hasn't been configured yet!");
+		
+		//return article;
 	}
 	
 	//if more kinds of articles existed, more methods would be here
