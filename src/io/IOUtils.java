@@ -1,7 +1,5 @@
 package io;
 
-import java.util.HashMap;
-
 import com.thoughtworks.xstream.XStream;
 
 import datatype.EAN13;
@@ -25,6 +23,13 @@ public class IOUtils {
 	 * @throws NumberInvalidFormatException
 	 */
 	public static String getArticle(long ID) {
+		String returnString = null;
+		XStream serializer = new XStream();
+		returnString = serializer.toXML(getStandardExchangeArticle(ID));
+		return returnString;
+	}
+	
+	public static String getArticle(String ID) {
 		String returnString = null;
 		XStream serializer = new XStream();
 		returnString = serializer.toXML(getStandardExchangeArticle(ID));
@@ -56,9 +61,19 @@ public class IOUtils {
 		return sea;
 	}
 	
-	public static StandardExchangeArticle deserializeStandardArticle(String xml){
-		XStream deserializer = new XStream();
-		StandardExchangeArticle sea = (StandardExchangeArticle)deserializer.fromXML(xml);
-		return sea;
+	public static StandardExchangeArticle getStandardExchangeArticle(String ID){
+		try{
+			long lid = Long.parseLong(ID);
+			return getStandardExchangeArticle(lid);
+		}
+		catch(Exception ex){
+			StandardExchangeArticle sea = new StandardExchangeArticle();
+			sea.setID(0);
+			sea.setName("Invalid Format: ID");
+			sea.setDescription("The given ID is invalid!");
+			return sea;
+		}
 	}
+	
+
 }
