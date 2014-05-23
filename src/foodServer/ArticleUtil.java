@@ -1,5 +1,9 @@
 package foodServer;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.exceptions.ArticleNotFoundException;
@@ -25,6 +29,9 @@ public class ArticleUtil {
 	 */
 	public static Article getArticle(IEAN ean1) throws DatabaseConnectionException {
 		Article article = null;
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ANMAIServer");
+		EntityManager em = emf.createEntityManager();
 		  //retrieve article from db
 		  //article = ....
 		//temporarily throw DatabaseConnectionException
