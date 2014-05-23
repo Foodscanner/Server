@@ -36,9 +36,9 @@ public class Article implements IArticle {
 	private String description;
 
 	private URI imageURI;
-	private List<IIngredient> ingredients;
+	private List<Ingredient> ingredients;
 
-	private List<IFlag> flags;
+	private List<Flag> flags;
 
 	/**
 	 * Constructor of an article with parameter id
@@ -155,7 +155,7 @@ public class Article implements IArticle {
 	@JoinTable(name="Article_Flags",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
-	public List<IFlag> getFlags() {
+	public List<Flag> getFlags() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -163,7 +163,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#addFlag(foodServer.IFlag) Adds a product
 	 *      specific flag
 	 */
-	public void addFlag(IFlag aFlag) {
+	public void addFlag(Flag aFlag) {
 		// TODO Auto-generated method stub
 	}
 
@@ -171,7 +171,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#removeFlag(foodServer.IFlag) Removes a product
 	 *      specific flag. If flag doesn't exist, request is ignored
 	 */
-	public void removeFlag(IFlag aFlag) {
+	public void removeFlag(Flag aFlag) {
 		flags.remove(aFlag);
 	}
 
@@ -179,7 +179,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
-	public List<IFlag> getProductFlags() {
+	public List<Flag> getProductFlags() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -190,7 +190,7 @@ public class Article implements IArticle {
 	@JoinTable(name="Article_Ingredients",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))
-	public List<IIngredient> getIngredients() {
+	public List<Ingredient> getIngredients() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -198,7 +198,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient) Adds an
 	 *      ingredient
 	 */
-	public void addIngredient(IIngredient ingredient) {
+	public void addIngredient(Ingredient ingredient) {
 		ingredients.add(ingredient);
 	}
 
@@ -206,7 +206,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#removeIngredient(foodServer.IIngredient) Removes
 	 *      an ingredient
 	 */
-	public void removeIngredient(IIngredient ingredient) {
+	public void removeIngredient(Ingredient ingredient) {
 		ingredients.remove(ingredient);
 	}
 }

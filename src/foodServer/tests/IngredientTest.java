@@ -15,9 +15,9 @@ import foodServer.Ingredient;
 //TODO Task assigned to Christian
 public class IngredientTest {
   
-  IIngredient testIngredient;
-  IFlag flag1;
-  IFlag flag2;
+  Ingredient testIngredient;
+  Flag flag1;
+  Flag flag2;
 
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {}

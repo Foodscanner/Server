@@ -13,16 +13,16 @@ public interface IIngredient {
 
   public String getName();
   
-  public List<IFlag> getFlags();
+  public List<Flag> getFlags();
   
-  void removeFlag(IFlag flag);
+  void removeFlag(Flag flag);
 
-  public void addFlag(IFlag flag);
+  public void addFlag(Flag flag);
 
   public void setId(int aID);
   
   public void setName(String aName);
   
-  public IIngredient copy();
+  public Ingredient copy();
 
 }

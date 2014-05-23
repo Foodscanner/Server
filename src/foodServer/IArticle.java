@@ -58,30 +58,30 @@ public interface IArticle {
 	 * Adds a product-specific flag
 	 * @param aFlag A flag that should be added to IArticle
 	 */
-	public void addFlag(IFlag aFlag);
+	public void addFlag(Flag aFlag);
 
 	/**
 	 * Removes a product-specific flag
 	 * @param aFlag A flag that should be removed from IArticle
 	 */
-	public void removeFlag(IFlag aFlag);
+	public void removeFlag(Flag aFlag);
 	
-	public List<IFlag> getFlags();
+	public List<Flag> getFlags();
 	
-	public List<IFlag> getProductFlags();
+	public List<Flag> getProductFlags();
 	
 	//Ingredients
-	public List<IIngredient> getIngredients();
+	public List<Ingredient> getIngredients();
 	
     /**
      * @param ingredient The ingredient to add
      */
-    public void addIngredient(IIngredient ingredient);
+    public void addIngredient(Ingredient ingredient);
     
     /**
      * @param ingredient The ingredient to remove
      */
-    public void removeIngredient(IIngredient ingredient);
+    public void removeIngredient(Ingredient ingredient);
 	
 
 

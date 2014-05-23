@@ -30,7 +30,7 @@ public class ArticlePersistenceTests {
   Article articleTwo;
   IEAN ean1;
   IEAN ean2;
-  List<IFlag> flags;
+  List<Flag> flags;
   
 
   @BeforeClass
@@ -60,7 +60,7 @@ public class ArticlePersistenceTests {
     ean2 = new EAN13(1234567891019L);
     articleOne = new Article(ean1);
     for(int i=0;i<10;i++){
-    	IFlag flag = new Flag();
+    	Flag flag = new Flag();
     	flag.setDescription("Desc: " + i);
     	flag.setName("Name: " + i);
         flags.add(flag);
@@ -70,11 +70,11 @@ public class ArticlePersistenceTests {
     articleOne.setDescription("Yummy yummy");
     
     for(int i=0;i<10;i++){
-    	 IIngredient ingredient = new Ingredient();
+    	 Ingredient ingredient = new Ingredient();
          ingredient.setName("IngredientName: " + i);
          
     	for(int j=0;j<10;j++){
-    		IFlag flag = new Flag();
+    		Flag flag = new Flag();
         	flag.setDescription("IngredientFlag-Desc: " + "i: " + i+ "j: " + j);
         	flag.setName("IngredientFlag-Name: " + "i: " + i+ "j: " + j);
     		ingredient.addFlag(flag);

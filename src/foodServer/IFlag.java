@@ -54,6 +54,6 @@ public interface IFlag{
 	/**
 	 * @return A copy of the flag
 	 */
-	public IFlag copy();
+	public Flag copy();
 
 }
