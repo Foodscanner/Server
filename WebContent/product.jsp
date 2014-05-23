@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="foodServer.Flag"%>
 <%@page import="datatype.StandardExchangeArticle"%>
@@ -6,9 +8,9 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-long ean = Long.parseLong(request.getParameter("ean"));
-String info = "<p>EAN: " + ean+"</p>";
-StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(ean);
+;
+String info = "<p>EAN: " + request.getParameter("ean") +"</p>";
+StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(request.getParameter("ean"));
  %>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +72,7 @@ StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(ean);
 					</h1>
 					<h2>
 						<% 
-						out.write(IOUtils.getArticle(ean));
+						out.write(IOUtils.getArticle(request.getParameter("ean")));
 						out.write(info);%>
 					</h2>
 				</div>
