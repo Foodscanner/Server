@@ -3,6 +3,7 @@ package foodServer;
 import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.exceptions.ArticleNotFoundException;
+import foodServer.exceptions.DatabaseConnectionException;
 import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
@@ -22,7 +23,7 @@ public class ArticleUtil {
 	 * @param ean1 The id of the article, needs to be a valid EAN
 	 * @return An article of type Article, if article is in Database. Else null is returned.
 	 */
-	public static Article getArticle(IEAN ean1) {
+	public static Article getArticle(IEAN ean1) throws DatabaseConnectionException {
 		Article article = null;
 		  //retrieve article from db
 		  //article = ....
