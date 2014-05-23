@@ -33,26 +33,25 @@ public class IOUtils {
 	
 	public static StandardExchangeArticle getStandardExchangeArticle(long ID){
 		StandardExchangeArticle sea = new StandardExchangeArticle();
-		sea.ID = ID;
+		sea.setID(ID);
 		
 		try {
 			IEAN iean = new EAN13(ID);
 			IArticle article = ArticleUtil.getArticle(iean);
 			if (article == null) {
-				sea.name = "No such article!";
-				sea.description = "Article does not exist in database!";
+				sea.setName("No Article!");
+				sea.setDescription("Article does not exist in database!");
 			}
 			// Packaging information into ExchangeArticle
-			sea.name = article.getName();
-			sea.description = article.getDescription();
-			sea.pictureURI = article.getImageURI();
-			sea.flags = new HashMap<Integer, String>();
+			sea.setName(article.getName());
+			sea.setDescription(article.getDescription());
+			sea.setPictureURI(article.getImageURI());
 			for (IFlag flag : article.getFlags()) {
-				sea.flags.put(flag.getId(), flag.getName());
+				sea.addFlag(flag.getId(), flag.getName());
 			}
 		} catch (NumberInvalidFormatException ex) {
-			sea.name = "File corruption!";
-			sea.description = "Received EAN is invalid due to file corruption during transmission - please try again!";
+			sea.setName("No Article!");
+			sea.setDescription("File corruption! - Received EAN is invalid due to file corruption during transmission - please try again!");
 		}
 		return sea;
 	}

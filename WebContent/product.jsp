@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="java.util.ArrayList"%>
+<%@page import="foodServer.Flag"%>
+<%@page import="datatype.StandardExchangeArticle"%>
 <%@page import="io.IOUtils"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 long ean = Long.parseLong(request.getParameter("ean"));
 String info = "<p>EAN: " + ean+"</p>";
+StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(ean);
  %>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,13 +66,12 @@ String info = "<p>EAN: " + ean+"</p>";
 			<div class="row">
 				<div class="col-lg-6">
 					<h1>
-						{Produkt}
+						<% out.write(sea.getName()); %>
 					</h1>
 					<h2>
-						{Description}
 						<% 
-						out.write(info);
-						out.write(IOUtils.getArticle(ean)); %>
+						out.write(IOUtils.getArticle(ean));
+						out.write(info);%>
 					</h2>
 				</div>
 				<!-- /col-lg-6 -->
@@ -88,16 +91,21 @@ String info = "<p>EAN: " + ean+"</p>";
 	<div class="container">
 		<div class="row mt centered">
 			<div class="col-lg-6 col-lg-offset-3">
-				<h1>
+				<h3>
 					Weitere Informationen zum Produkt
-				</h1>
-				<p>Informationen am richtigen Ort zur richtigen Zeit</p>
+				</h3>
 			</div>
 		</div>
 		<!-- /row -->
 
 		<div class="row mt centered">
-			<p>{Allergene}</p>
+			<h4>Product flags</h4>
+			<%
+			for(String s:sea.getFlags().values())
+			{
+			out.write("<p>" + s + "</p>");
+			}
+			 %>
 		</div>
 		<!-- /row -->
 	</div>
