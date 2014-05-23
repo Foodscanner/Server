@@ -57,10 +57,11 @@ public class IOUtils {
 			}
 		} catch (NumberInvalidFormatException NIFEx) {
 			sea.setName("No Article!");
-			sea.setDescription("File corruption! - Received EAN is invalid due to file corruption during transmission - please try again!");
+			sea.setDescription("File corruption! - Received EAN is invalid due to file corruption during transmission - please try again! \n Error message: "+NIFEx.getMessage());
 		}
 		catch (DatabaseConnectionException DCEx){
-			//TODO: retry, then if no change: return error message
+			sea.setName("Database connection error!");
+			sea.setDescription("Failed to connect to database! \n Error message: "+DCEx.getMessage());
 		}
 		return sea;
 	}
