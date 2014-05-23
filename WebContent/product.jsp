@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<%@page import="io.IOUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+long ean = Long.parseLong(request.getParameter("ean"));
+String info = "<p>EAN: " + ean+"</p>";
+ %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +66,9 @@
 					</h1>
 					<h2>
 						{Description}
+						<% 
+						out.write(info);
+						out.write(IOUtils.getArticle(ean)); %>
 					</h2>
 				</div>
 				<!-- /col-lg-6 -->
