@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import datatype.EAN13;
 import datatype.EAN8;
 import datatype.IEAN;
 

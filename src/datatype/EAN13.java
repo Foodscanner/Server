@@ -1,5 +1,6 @@
 package datatype;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gläser
  *
  */
-public class EAN13 implements IEAN{
+public class EAN13 implements IEAN, Serializable{
   
   long ean13;
   
@@ -129,6 +130,11 @@ public class EAN13 implements IEAN{
  */
 public long getEAN() {
 	return ean13;
+}
+
+
+public Long toLong() {
+	return this.ean13;
 }
   
   

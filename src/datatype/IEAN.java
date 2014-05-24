@@ -29,5 +29,7 @@ public interface IEAN {
 	 * 
 	 */
 	public void setEan(long ean) throws NumberInvalidFormatException;
+	
+	public Long toLong();
 
 }

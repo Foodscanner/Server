@@ -1,7 +1,9 @@
 package foodServer;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.ManyToMany;
 
 
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
-import org.hibernate.annotations.Generated;
-
+import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.exceptions.NumberInvalidFormatException;
 
@@ -25,11 +29,19 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gl�ser, Felipe Oehrwald
  * 
  */
-@Entity
+@Entity(name="Article")
+@NamedQueries({
+	//NamedQuery zur Auflistung aller Artikel
+	@NamedQuery(name = Article.FIND_ARTICLES,
+            query = "SELECT a " +
+		            "FROM Article a"),
+	@NamedQuery(name = Article.FIND_ARTICLE_BY_ARTICLEID,
+			query = "SELECT a " +
+					"FROM Article a " +
+					"WHERE a.ID = :" + Article.PARAM_ARTIKELID)})
 public class Article implements IArticle {
 
 	private IEAN id;
-	private long lid;
 
 	private String name;
 
@@ -40,6 +52,16 @@ public class Article implements IArticle {
 
 	private List<Flag> flags;
 
+
+	/** The Constant PARAM_FILIALID. */
+	public static final String PARAM_ARTIKELID = "ID";
+	
+	public static final String FIND_ARTICLES = "findArticles";	
+	public static final String FIND_ARTICLE_BY_ARTICLEID = "findFilialeByFilialID";
+	
+	public Article(){
+		
+	}
 	/**
 	 * Constructor of an article with parameter id
 	 * 
@@ -50,11 +72,8 @@ public class Article implements IArticle {
 	 *             EAN validation from datatypes/EAN13 to prevent exception
 	 * 
 	 */
-	
-	
 	public Article(IEAN ean) throws NumberInvalidFormatException {
 		id = ean;
-		lid = ean.getEAN();
 	}
 
 	/**
@@ -63,6 +82,7 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getID()
 	 * 
 	 */
+
 	public IEAN getID() {
 		return this.id;
 	}
@@ -75,6 +95,10 @@ public class Article implements IArticle {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getIDasLong(){
 		return this.getID().getEAN();
+	}
+	
+	public void setIDasLong(long id) throws NumberInvalidFormatException{
+		this.id.setEan(id);
 	}
 
 	/**
@@ -134,6 +158,10 @@ public class Article implements IArticle {
 	public String getImageURIAsString(){
 		return this.getImageURI().toString();
 	}
+	
+	public void setImageURIAsString(String imageURI) throws URISyntaxException{
+		this.imageURI = new URI(imageURI);
+	}
 	/**
 	 * @see foodServer.IArticle#setImageURI(java.net.URI) Sets the URI of the
 	 *      image
@@ -156,7 +184,11 @@ public class Article implements IArticle {
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<Flag> getFlags() {
-		throw new UnsupportedOperationException();
+		return this.flags;
+	}
+	
+	public void setFlags(List<Flag> flags){
+		this.flags = flags;
 	}
 
 	/**
@@ -192,6 +224,10 @@ public class Article implements IArticle {
 	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))
 	public List<Ingredient> getIngredients() {
 		throw new UnsupportedOperationException();
+	}
+	
+	public void setIngredients(List<Ingredient> ingredients){
+		this.ingredients = ingredients;
 	}
 
 	/**

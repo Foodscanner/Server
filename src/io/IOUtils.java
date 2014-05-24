@@ -64,10 +64,12 @@ public class IOUtils {
 				sea.addFlag(flag.getId(), flag.getName());
 			}
 		} catch (NumberInvalidFormatException NIFEx) {
+			System.err.println(NIFEx);
 			sea.setName("No Article!");
 			sea.setDescription("File corruption! - Received EAN is invalid due to file corruption during transmission - please try again! \n Error message: "+NIFEx.getMessage());
 		}
 		catch (DatabaseConnectionException DCEx){
+			System.err.println(DCEx);
 			sea.setName("Database connection error!");
 			sea.setDescription("Failed to connect to database! \n Error message: "+DCEx.getMessage());
 		}
@@ -76,14 +78,17 @@ public class IOUtils {
 	
 	public static StandardExchangeArticle getStandardExchangeArticle(String ID){
 		try{
+			System.out.println("Trying to parse String " + ID + " to long");
 			long lid = Long.parseLong(ID);
+			System.out.println("Parsed long: " + lid);
 			return getStandardExchangeArticle(lid);
 		}
 		catch(Exception ex){
 			StandardExchangeArticle sea = new StandardExchangeArticle();
+			System.err.println("Exception ex occured in IOUtils while trying to getStandardExchangeArticle("+ID+"): \nl" + ex);
 			sea.setID(0);
-			sea.setName("Invalid Format: ID");
-			sea.setDescription("The given ID is invalid!");
+			sea.setName("Exception!");
+			sea.setDescription("Something went wrong! Stacktrace" + ex);
 			return sea;
 		}
 	}

@@ -1,14 +1,17 @@
 package foodServer;
 
+import java.util.List;
+
+import io.EntityManagerUtil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import datatype.EAN13;
 import datatype.IEAN;
-import foodServer.exceptions.ArticleNotFoundException;
 import foodServer.exceptions.DatabaseConnectionException;
-import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
  * Used for creating instances of Articles by retrieving them from database
@@ -28,14 +31,19 @@ public class ArticleUtil {
 	 * @return An article of type Article, if article is in Database. Else null is returned.
 	 */
 	public static Article getArticle(IEAN ean1) throws DatabaseConnectionException {
-		Article article = null;
-		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ANMAIServer");
-		EntityManager em = emf.createEntityManager();
-		  //retrieve article from db
-		  //article = ....
-		//temporarily throw DatabaseConnectionException
-		throw new DatabaseConnectionException("Database hasn't been configured yet!");
+		Article article;
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		TypedQuery<Article> query = em.createNamedQuery(Article.FIND_ARTICLE_BY_ARTICLEID, Article.class);
+		query.setParameter(Article.PARAM_ARTIKELID, ean1);
+		try{
+		List<Article> result = query.getResultList();
+		article = result.get(0);
+		System.out.println(article);
+		return article; 
+		}
+		catch (Exception ex){
+		throw new DatabaseConnectionException("Exception ex has been thrown, stacktrace: " + ex);
+		}
 		
 		//return article;
 	}

@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="ANMAIServer">
+	<persistence-unit name="ANMAIServer" transaction-type="RESOURCE_LOCAL">
 		<class>foodServer.Article</class>
 		<class>foodServer.Flag</class>
 		<class>foodServer.Ingredient</class>
+		<properties>
+			<property name="hibernate.jpa.HibernatePersistenceProvider" value="META-INF/hibernate.cfg.xml"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:postgresql:&lt;name&gt;"/>
+			<property name="hibernate.default_schema" value="public"/>
+			<property name="hibernate.connection.username" value="foodscanner"/>
+			<property name="hibernate.connection.password" value="foodscanner"/>
+			<property name="eclipselink.ddl-generation.output-mode" value="sql-script"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/foodscanner"/>
+			<property name="javax.persistence.jdbc.user" value="foodscanner"/>
+			<property name="javax.persistence.jdbc.password" value="foodscanner"/>
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+		</properties>
 	</persistence-unit>
 </persistence>

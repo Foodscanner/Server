@@ -19,15 +19,18 @@ import javax.persistence.ManyToMany;
  * @author Felipe Oehrwald
  * 
  */
-@Entity
+@Entity(name="Ingredient")
 public class Ingredient implements IIngredient {
 	private int id;
 	private String name;
 	private List<Flag> flags;
+	private List<Article> articles;
 
 	public Ingredient() {
 		flags = new ArrayList<Flag>();
 	}
+	
+
 
 	@Id
 	@Column(name = "ID", nullable = false)
@@ -71,6 +74,10 @@ public class Ingredient implements IIngredient {
 		}
 		return tempFlags;
 	}
+	
+	public void setFlags(List<Flag> flags){
+		this.flags = flags;
+	}
 
 	/**
 	 * Copies an ingredient with all properties except id, which is left
@@ -87,7 +94,13 @@ public class Ingredient implements IIngredient {
 		}
 
 		return ingredient;
-
 	}
-
+	
+	@ManyToMany(mappedBy="ingredients")
+	public List<Article> getArticles() { 
+		return this.articles; }
+	
+	public void setArticles(List<Article> articles){
+		this.articles = articles;
+	}
 }

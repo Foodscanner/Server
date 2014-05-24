@@ -9,8 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import foodServer.Flag;
-import foodServer.IFlag;
-import foodServer.IIngredient;
 import foodServer.Ingredient;
 //TODO Task assigned to Christian
 public class IngredientTest {
