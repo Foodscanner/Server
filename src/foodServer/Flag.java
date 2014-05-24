@@ -1,6 +1,7 @@
 package foodServer;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,6 +39,11 @@ public class Flag implements IFlag, Serializable {
 	private List<Article> articles;
 	private List<Ingredient> ingredients;
 
+	public Flag(){
+		articles = new ArrayList<Article>();
+		ingredients = new ArrayList<Ingredient>();
+	}
+	
 	@Id
 	@Column(name = "ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
