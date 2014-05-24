@@ -131,11 +131,6 @@ public class EAN13 implements IEAN, Serializable{
 public long getEAN() {
 	return ean13;
 }
-
-
-public Long toLong() {
-	return this.ean13;
-}
   
   
 }
