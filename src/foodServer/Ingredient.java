@@ -19,7 +19,7 @@ import javax.persistence.ManyToMany;
  * @author Felipe Oehrwald
  * 
  */
-@Entity(name="Ingredient")
+@Entity(name="INGREDIENT")
 public class Ingredient implements IIngredient {
 	private int id;
 	private String name;
@@ -60,7 +60,7 @@ public class Ingredient implements IIngredient {
 	}
 
 	@ManyToMany
-	@JoinTable(name="Ingredient_Flags",
+	@JoinTable(name="INGREDIENT_FLAGS",
 	joinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<Flag> getFlags() {

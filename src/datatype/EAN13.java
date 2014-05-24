@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
@@ -13,7 +14,12 @@ import foodServer.exceptions.NumberInvalidFormatException;
  */
 public class EAN13 implements IEAN, Serializable{
   
-  long ean13;
+
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6336928135485939525L;
+	long ean13;
   
   /**
    * Standard constructor for the EAN
@@ -128,9 +134,12 @@ public class EAN13 implements IEAN, Serializable{
  * @see datatype.IEAN#getEAN()
  * Returns the value of the EAN as long
  */
-public long getEAN() {
+	public long getEAN() {
 	return ean13;
-}
+	}
   
+	public String toString(){
+		return new Long(ean13).toString();
+	}
   
 }

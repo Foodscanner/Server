@@ -15,6 +15,7 @@ import org.junit.Test;
 import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.Article;
+import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
  * Tests for the {@link Article}
@@ -52,13 +53,12 @@ public class ArticleTests {
 	public void setUp() throws Exception {
 		ean1 = new EAN13(5010019640161L);
 		ean2 = new EAN13(9783446430150L);
-		testArticle = new Article(ean1);
-		testArticle.setName("Goldb�ren");
+		testArticle = new Article(ean1.getEAN());
+		testArticle.setName("Goldbaeren");
 		testArticle.setDescription("Yummy yummy");
 		// An example for a URI, follows RFC standard for URI and is from the
 		// IANA reserved name space for tests
-		testArticle.setImageURI(new URI(
-				"http://example.com/getImage?param=exampleParam"));
+		testArticle.setImageURL("http://example.com/getImage?param=exampleParam");
 
 	}
 
@@ -88,11 +88,12 @@ public class ArticleTests {
 
 	/**
 	 * Test method for {@link foodServer.Article#setID(IEAN)}.
+	 * @throws NumberInvalidFormatException 
 	 */
 	@Test
-	public void testSetID() {
+	public void testSetID() throws NumberInvalidFormatException {
 		assertEquals(testArticle.getID(), ean1);
-		testArticle.setID(ean2);
+		testArticle.setID(ean2.getEAN());
 		assertEquals(testArticle.getID(), ean2);
 	}
 
@@ -109,9 +110,9 @@ public class ArticleTests {
 	 */
 	@Test
 	public void testSetName() {
-		assertEquals(testArticle.getName(), "Goldb�ren");
-		testArticle.setName("Silberb�ren");
-		assertEquals(testArticle.getName(), "Silberb�ren");
+		assertEquals(testArticle.getName(), "Goldbaeren");
+		testArticle.setName("Silberbaeren");
+		assertEquals(testArticle.getName(), "Silberbaeren");
 	}
 
 	/**
@@ -138,13 +139,7 @@ public class ArticleTests {
 	 */
 	@Test
 	public void testGetImageURI() {
-		try {
-			assertEquals(testArticle.getImageURI(), new URI(
-					"http://example.com/getImage?param=exampleParam"));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			assertEquals(testArticle.getImageURL(), "http://example.com/getImage?param=exampleParam");
 	}
 
 	/**
@@ -152,17 +147,9 @@ public class ArticleTests {
 	 */
 	@Test
 	public void testSetImageURI() {
-		try {
-			assertEquals(testArticle.getImageURI(), new URI(
-					"http://example.com/getImage?param=exampleParam"));
-			testArticle.setImageURI(new URI(
-					"http://example.org/getImage2?param2=exampleParam2"));
-			assertEquals(testArticle.getImageURI(), new URI(
-					"http://example.org/getImage2?param2=exampleParam2"));
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			assertEquals(testArticle.getImageURL(), "http://example.com/getImage?param=exampleParam");
+			testArticle.setImageURL("http://example.org/getImage2?param2=exampleParam2");
+			assertEquals(testArticle.getImageURL(), "http://example.org/getImage2?param2=exampleParam2");
 	}
 
 	/**

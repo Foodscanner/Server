@@ -18,7 +18,7 @@ import javax.persistence.ManyToMany;
  * @author Felipe Oehrwald
  * 
  */
-@Entity
+@Entity(name="FLAG")
 public class Flag implements IFlag, Serializable {
 
 	

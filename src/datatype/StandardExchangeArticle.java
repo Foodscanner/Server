@@ -13,7 +13,7 @@ public class StandardExchangeArticle {
 private long ID;
 private String name;
 private String description;
-private URI pictureURI;
+private String pictureURL;
 private HashMap<Integer, String> flags;
 
 //initialized flags to prevent null pointer exception
@@ -39,11 +39,11 @@ public String getDescription() {
 public void setDescription(String description) {
 	this.description = description;
 }
-public URI getPictureURI() {
-	return pictureURI;
+public String getPictureURL() {
+	return pictureURL;
 }
-public void setPictureURI(URI pictureURI) {
-	this.pictureURI = pictureURI;
+public void setPictureURL(String pictureURL) {
+	this.pictureURL = pictureURL;
 }
 public HashMap<Integer, String> getFlags() {
 	return flags;

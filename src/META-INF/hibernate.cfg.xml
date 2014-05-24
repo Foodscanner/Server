@@ -3,11 +3,11 @@
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
  <session-factory name="">
-  <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+  <property name="hibernate.connection.driver_class">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.connection.password">foodscanner</property>
-  <property name="hibernate.connection.url">jdbc:postgresql:postgres</property>
+  <property name="hibernate.connection.url">jdbc:mysql://7says.de:3306/foodscanner</property>
   <property name="hibernate.connection.username">foodscanner</property>
   <property name="hibernate.default_schema">foodscanner</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
  </session-factory>
 </hibernate-configuration>

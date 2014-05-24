@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -58,7 +59,8 @@ public class ArticlePersistenceTests {
   public void testArticle() throws NumberInvalidFormatException {
     ean1 = new EAN13(5010019640161L);
     ean2 = new EAN13(1234567891019L);
-    articleOne = new Article(ean1);
+    articleOne = new Article(ean1.getEAN());
+    flags = new ArrayList<Flag>();
     for(int i=0;i<10;i++){
     	Flag flag = new Flag();
     	flag.setDescription("Desc: " + i);
@@ -72,7 +74,7 @@ public class ArticlePersistenceTests {
     for(int i=0;i<10;i++){
     	 Ingredient ingredient = new Ingredient();
          ingredient.setName("IngredientName: " + i);
-         
+         //some example flags
     	for(int j=0;j<10;j++){
     		Flag flag = new Flag();
         	flag.setDescription("IngredientFlag-Desc: " + "i: " + i+ "j: " + j);
@@ -83,25 +85,12 @@ public class ArticlePersistenceTests {
     }
     
     //An example for a URI, follows RFC standard for URI and is from the IANA reserved name space for tests 
-    try {
-      articleOne.setImageURI(new URI("http://example.com/getImage?param=exampleParam"));
-    } catch (URISyntaxException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      fail("No exception expected here");
-    }
-      articleTwo = new Article(ean2);
+      articleOne.setImageURL("http://example.com/getImage?param=exampleParam");
+      articleTwo = new Article(ean2.getEAN());
       articleTwo.setName("Example product");
       articleTwo.setDescription("Paperlike dry taste with black letters to assist mouthfeel");
       //An example for a URI, follows RFC standard for URI and is from the IANA reserved name space for tests 
-      try {
-        articleTwo.setImageURI(new URI("http://example.com/getImage?param=exampleParam"));
-      } catch (URISyntaxException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-        fail("No exception expected here");
-      }
-    
+        articleTwo.setImageURL("http://example.com/getImage?param=exampleParam");
   }
 
   /**
@@ -113,7 +102,8 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetID() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    IArticle newArticle = ArticleUtil.getArticle(ean1);
+    
+	Article newArticle = ArticleUtil.getArticle(ean1);
     assertEquals(articleOne.getID(),newArticle.getID());
   }
 
@@ -128,7 +118,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetName() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
     assertEquals(articleOne.getName(),newArticle.getName());
   }
 
@@ -141,7 +131,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetDescription() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
     assertEquals(articleOne.getDescription(),newArticle.getDescription());
   }
 
@@ -154,20 +144,21 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetImageURI() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
-    assertEquals(articleOne.getImageURI(),newArticle.getImageURI());
+    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+    assertEquals(articleOne.getImageURL(),newArticle.getImageURL());
   }
 
   /**
    * Test method for {@link foodServer.Article#getIngredients()}.
    * Tests if all ingredients have been persisted
  * @throws DatabaseConnectionException 
+ * @throws NumberInvalidFormatException 
    */
   @Test
-  public void testGetIngredients() throws DatabaseConnectionException {
+  public void testGetIngredients() throws DatabaseConnectionException, NumberInvalidFormatException {
 	    //articleOne.persist();
-	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
-	    for(IIngredient ingredient:newArticle.getIngredients()){
+	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	    for(Ingredient ingredient:newArticle.getIngredients()){
 	    	assertTrue(articleOne.getIngredients().contains(ingredient));
 	    }
   }
@@ -176,11 +167,12 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getFlags()}.
    * Tests if all flags can be retrieved
  * @throws DatabaseConnectionException 
+ * @throws NumberInvalidFormatException 
    */
   @Test
-  public void testGetFlags() throws DatabaseConnectionException {
+  public void testGetFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
-	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
 	    for(IFlag flag:newArticle.getFlags()){
 	    	assertTrue(articleOne.getFlags().contains(flag));
 	    }
@@ -190,12 +182,13 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getProductFlags()}.
    * Tests if all product specific flag can be retrieved
  * @throws DatabaseConnectionException 
+ * @throws NumberInvalidFormatException 
    */
   @Test
-  public void testGetProductFlags() throws DatabaseConnectionException {
+  public void testGetProductFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
-	    IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
-	    for(IFlag flag:newArticle.getProductFlags()){
+	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	    for(Flag flag:newArticle.getProductFlags()){
 	    	assertTrue(articleOne.getProductFlags().contains(flag));
 	    }
   }
@@ -204,13 +197,14 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#removeFlag(foodServer.IFlag)}.
    * Tests if a flag can be removed and if change can be persisted
  * @throws DatabaseConnectionException 
+ * @throws NumberInvalidFormatException 
    */
   @Test
-  public void testRemoveProductFlag() throws DatabaseConnectionException {
+  public void testRemoveProductFlag() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
 	  articleOne.removeFlag(flags.get(0));
 	  //articleOne.persist();
-	  IArticle newArticle = ArticleUtil.getArticle(articleOne.getID());
+	  Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
 	  assertFalse(newArticle.getProductFlags().contains(flags.get(0)));
   }
 

@@ -2,6 +2,7 @@ package foodServer;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,12 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.ManyToMany;
 
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+
+import org.hibernate.annotations.Type;
 
 import datatype.EAN13;
 import datatype.IEAN;
@@ -29,38 +33,45 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gl�ser, Felipe Oehrwald
  * 
  */
-@Entity(name="Article")
+@Entity(name="ARTICLE")
 @NamedQueries({
 	//NamedQuery zur Auflistung aller Artikel
 	@NamedQuery(name = Article.FIND_ARTICLES,
             query = "SELECT a " +
-		            "FROM Article a"),
+		            "FROM ARTICLE a"),
 	@NamedQuery(name = Article.FIND_ARTICLE_BY_ARTICLEID,
 			query = "SELECT a " +
-					"FROM Article a " +
-					"WHERE a.ID = :" + Article.PARAM_ARTIKELID)})
-public class Article implements IArticle {
+					"FROM ARTICLE a " +
+					"WHERE a.ID = :" + Article.PARAM_ARTICLEID)})
+public class Article implements IArticle<EAN13> {
+	
+	private EAN13 ean;
 
-	private IEAN id;
+	private long id;
 
 	private String name;
 
 	private String description;
 
-	private URI imageURI;
+	private String imageURL;
 	private List<Ingredient> ingredients;
 
 	private List<Flag> flags;
 
 
-	/** The Constant PARAM_FILIALID. */
-	public static final String PARAM_ARTIKELID = "ID";
+	/** The Constant PARAM_ARTICLEID. */
+	public static final String PARAM_ARTICLEID = "ID";
+	public static final String PARAM_NAME = "Name";
+	public static final String PARAM_IMAGEURL = "ImageURL";
+	public static final String PARAM_FLAGS = "flags";
 	
 	public static final String FIND_ARTICLES = "findArticles";	
-	public static final String FIND_ARTICLE_BY_ARTICLEID = "findFilialeByFilialID";
+	public static final String FIND_ARTICLE_BY_ARTICLEID = "findArticleByArticleID";
 	
 	public Article(){
-		
+		ean = new EAN13();
+		ingredients = new ArrayList<Ingredient>();
+		flags = new ArrayList<Flag>();
 	}
 	/**
 	 * Constructor of an article with parameter id
@@ -72,33 +83,30 @@ public class Article implements IArticle {
 	 *             EAN validation from datatypes/EAN13 to prevent exception
 	 * 
 	 */
-	public Article(IEAN ean) throws NumberInvalidFormatException {
-		id = ean;
+	public Article(long id) throws NumberInvalidFormatException {
+		this();
+		setID(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Article [ean=" + ean + ", id=" + id + ", name=" + name
+				+ ", description=" + description + ", imageURI=" + imageURL
+				+ ", ingredients=" + ingredients + ", flags=" + flags + "]";
+	}
 	/**
 	 * Gets the id of the Article as long
 	 * 
 	 * @see foodServer.IArticle#getID()
 	 * 
 	 */
-
-	public IEAN getID() {
-		return this.id;
-	}
-	
-	/**
-	 * @return the value of the id as long
-	 */
 	@Id
-	@Column(name = "ID", nullable=false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getIDasLong(){
-		return this.getID().getEAN();
-	}
-	
-	public void setIDasLong(long id) throws NumberInvalidFormatException{
-		this.id.setEan(id);
+	@Column(name="ID")
+	public long getID() {
+		return this.id;
 	}
 
 	/**
@@ -107,9 +115,13 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#setID(IEAN ean)
 	 * @param ean
 	 *            The ean to set
+	 * @throws NumberInvalidFormatException 
 	 */
-	public void setID(IEAN ean) {
-		this.id = ean;
+	public void setID(long id) throws NumberInvalidFormatException {
+		if(this.ean.isValid(id)){
+		this.id = id;
+		this.ean.setEan(id);
+		}
 	}
 
 	/**
@@ -149,26 +161,19 @@ public class Article implements IArticle {
 	/**
 	 * @see foodServer.IArticle#getImageURI() Gets the image URI
 	 **/
-	public URI getImageURI() {
+	@Column(name="ImageURL")
+	public String getImageURL() {
 		// URI is immutable
-		return this.imageURI;
+		return this.imageURL;
 	}
 
-	@Column(name="URI")
-	public String getImageURIAsString(){
-		return this.getImageURI().toString();
-	}
-	
-	public void setImageURIAsString(String imageURI) throws URISyntaxException{
-		this.imageURI = new URI(imageURI);
-	}
 	/**
 	 * @see foodServer.IArticle#setImageURI(java.net.URI) Sets the URI of the
 	 *      image
 	 */
-	public void setImageURI(URI aImageURI) {
+	public void setImageURL(String imageURL) {
 		// TODO Logic check
-		this.imageURI = aImageURI;
+		this.imageURL = imageURL;
 	}
 
 	/*
@@ -211,19 +216,27 @@ public class Article implements IArticle {
 	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
+	@ManyToMany
+	@JoinTable(name="ARTICLE_FLAGS",
+	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
+	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<Flag> getProductFlags() {
-		throw new UnsupportedOperationException();
+		return flags;
+	}
+	
+	public void setProductFlags(List<Flag> flags){
+		this.flags = flags;
 	}
 
 	/**
 	 * @see foodServer.IArticle#getIngredients() Returns a list of ingredients
 	 */
 	@ManyToMany
-	@JoinTable(name="Article_Ingredients",
+	@JoinTable(name="ARTICLE_INGREDIENTS",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))
 	public List<Ingredient> getIngredients() {
-		throw new UnsupportedOperationException();
+		return ingredients;
 	}
 	
 	public void setIngredients(List<Ingredient> ingredients){

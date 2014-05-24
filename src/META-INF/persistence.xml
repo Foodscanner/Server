@@ -5,18 +5,21 @@
 		<class>foodServer.Flag</class>
 		<class>foodServer.Ingredient</class>
 		<properties>
+		    <property name="eclipselink.logging.level" value="FINE"/>
 			<property name="hibernate.jpa.HibernatePersistenceProvider" value="META-INF/hibernate.cfg.xml"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-			<property name="hibernate.connection.url" value="jdbc:postgresql:&lt;name&gt;"/>
-			<property name="hibernate.default_schema" value="public"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://7says.de:3306/foodscanner"/>
+			<property name="hibernate.default_schema" value="foodscanner"/>
 			<property name="hibernate.connection.username" value="foodscanner"/>
 			<property name="hibernate.connection.password" value="foodscanner"/>
 			<property name="eclipselink.ddl-generation.output-mode" value="sql-script"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/foodscanner"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://7says.de:3306/foodscanner"/>
 			<property name="javax.persistence.jdbc.user" value="foodscanner"/>
 			<property name="javax.persistence.jdbc.password" value="foodscanner"/>
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+			<property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+			<property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.MySQLPlatform" />
 		</properties>
 	</persistence-unit>
 </persistence>

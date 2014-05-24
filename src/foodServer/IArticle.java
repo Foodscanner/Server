@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import datatype.IEAN;
+import foodServer.exceptions.NumberInvalidFormatException;
 
 
 /**
@@ -11,20 +12,21 @@ import datatype.IEAN;
  * @author Christian Gläser
  *
  */
-public interface IArticle {
+public interface IArticle<E> {
 	
 	
 	//ID
 	/**
 	 * @return Returns the EAN of the Product
 	 */
-	public IEAN getID();
+	public long getID();
 
 	/**
 	 * Necessary in case EAN changes, should be used with caution
 	 * @param aID This id is being set
+	 * @throws NumberInvalidFormatException 
 	 */
-	public void setID(IEAN aID);
+	public void setID(long aID) throws NumberInvalidFormatException;
 
 	//Name
 	/**
@@ -38,12 +40,12 @@ public interface IArticle {
 	public void setName(String aName);
 
 	//Image URI
-	public URI getImageURI();
+	public String getImageURL();
 	
 	/**
 	 * @param aImageURI The image URI to set
 	 */
-	public void setImageURI(URI aImageURI);
+	public void setImageURL(String ImageURL);
 	
 	//Description
 	public String getDescription();
@@ -58,13 +60,13 @@ public interface IArticle {
 	 * Adds a product-specific flag
 	 * @param aFlag A flag that should be added to IArticle
 	 */
-	public void addFlag(Flag aFlag);
+	public void addFlag(Flag flag);
 
 	/**
 	 * Removes a product-specific flag
 	 * @param aFlag A flag that should be removed from IArticle
 	 */
-	public void removeFlag(Flag aFlag);
+	public void removeFlag(Flag flag);
 	
 	public List<Flag> getFlags();
 	

@@ -32,12 +32,18 @@ public class ArticleUtil {
 	 */
 	public static Article getArticle(IEAN ean1) throws DatabaseConnectionException {
 		Article article;
+		System.out.println("getArticle");
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<Article> query = em.createNamedQuery(Article.FIND_ARTICLE_BY_ARTICLEID, Article.class);
-		query.setParameter(Article.PARAM_ARTIKELID, ean1);
+		query.setParameter(Article.PARAM_ARTICLEID, ean1.getEAN());
+		System.out.println(query);
 		try{
-		List<Article> result = query.getResultList();
+		System.out.println("try block in getArticle reached");
+			List<Article> result = query.getResultList();
+			System.out.println(result);
+		System.out.println("query executed");
 		article = result.get(0);
+		System.out.println("result 0 retrieved");
 		System.out.println(article);
 		return article; 
 		}
