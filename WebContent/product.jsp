@@ -122,7 +122,7 @@ StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(request.getPara
 		<hr>
 		<div class="row centered">
 			<div class="col-lg-6 col-lg-offset-3">
-				<form class="form-inline" role="form" name="form" method="get" action="/product.jsp">
+				<form class="form-inline" role="form" name="form" method="get" action="product.jsp">
 						<div class="form-group">
 							<input type="text" class="form-control" name="ean" id="ean" 
 								placeholder="Geben sie hier eine EAN ein...">
