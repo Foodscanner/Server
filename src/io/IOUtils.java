@@ -5,7 +5,7 @@ import java.net.URISyntaxException;
 
 import com.thoughtworks.xstream.XStream;
 
-import datatype.EAN13;
+import datatype.EAN;
 import datatype.IEAN;
 import datatype.StandardExchangeArticle;
 import foodServer.Article;
@@ -47,7 +47,7 @@ public class IOUtils {
 		sea.setID(ID);
 		
 		try {
-			EAN13 iean = new EAN13(ID);
+			IEAN iean = new EAN(ID);
 			Article article = ArticleUtil.getArticle(iean);
 			if (article == null) {
 				sea.setName("No Article!");

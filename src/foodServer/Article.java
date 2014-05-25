@@ -24,7 +24,7 @@ import javax.persistence.NamedQuery;
 
 import org.hibernate.annotations.Type;
 
-import datatype.EAN13;
+import datatype.EAN;
 import datatype.IEAN;
 import foodServer.exceptions.NumberInvalidFormatException;
 
@@ -50,9 +50,9 @@ import foodServer.exceptions.NumberInvalidFormatException;
 					"LEFT JOIN FETCH article.flags " +
 					"LEFT JOIN FETCH article.ingredients " + 
 					"WHERE article.ID = :" + Article.PARAM_ARTICLEID)})
-public class Article implements IArticle<EAN13,Flag,Ingredient> {
+public class Article implements IArticle<EAN,Flag,Ingredient> {
 	
-	private EAN13 ean;
+	private EAN ean;
 
 	private long id;
 
@@ -78,7 +78,7 @@ public class Article implements IArticle<EAN13,Flag,Ingredient> {
 	
 	
 	public Article(){
-		ean = new EAN13();
+		ean = new EAN();
 		ingredients = new ArrayList<Ingredient>();
 		flags = new ArrayList<Flag>();
 	}
@@ -89,7 +89,7 @@ public class Article implements IArticle<EAN13,Flag,Ingredient> {
 	 *            The ean to set
 	 * @throws NumberInvalidFormatException
 	 *             This exception is thrown if number is not a valid EAN. Use
-	 *             EAN validation from datatypes/EAN13 to prevent exception
+	 *             EAN validation from datatypes/EAN to prevent exception
 	 * 
 	 */
 	public Article(long id) throws NumberInvalidFormatException {

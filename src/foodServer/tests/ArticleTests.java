@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import datatype.EAN13;
+import datatype.EAN;
 import datatype.IEAN;
 import foodServer.Article;
 import foodServer.exceptions.NumberInvalidFormatException;
@@ -26,8 +26,8 @@ import foodServer.exceptions.NumberInvalidFormatException;
 public class ArticleTests {
 
 	Article testArticle;
-	EAN13 ean1;
-	EAN13 ean2;
+	EAN ean1;
+	EAN ean2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -51,8 +51,8 @@ public class ArticleTests {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		ean1 = new EAN13(5010019640161L);
-		ean2 = new EAN13(9783446430150L);
+		ean1 = new EAN(5010019640161L);
+		ean2 = new EAN(9783446430150L);
 		testArticle = new Article(ean1.getEAN());
 		testArticle.setName("Goldbaeren");
 		testArticle.setDescription("Yummy yummy");
@@ -83,7 +83,7 @@ public class ArticleTests {
 	 */
 	@Test
 	public void testGetID() {
-		assertEquals(testArticle.getID(), new EAN13());
+		assertEquals(testArticle.getID(), new EAN());
 	}
 
 	/**

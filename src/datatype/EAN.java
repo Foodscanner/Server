@@ -12,7 +12,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gläser
  *
  */
-public class EAN13 implements IEAN, Serializable{
+public class EAN implements IEAN, Serializable{
   
 
   /**
@@ -24,25 +24,26 @@ public class EAN13 implements IEAN, Serializable{
   /**
    * Standard constructor for the EAN
    */
-  public EAN13() {
+  public EAN() {
     
   }
   
-  public EAN13(long ean) throws NumberInvalidFormatException {
+  public EAN(long ean) throws NumberInvalidFormatException {
     setEan(ean);
   }
   
   /**
    * Returns true if 
    * @param value The value to check
-   * @return true if number to check is an GS1 EAN13, else false
+   * @return true if number to check is an GS1 EAN, else false
    * source: Hibernate Validator v1.4
    */
   public boolean isValid(long value) {
     Long longValue = new Long(value);
     String stringValue =  longValue.toString();
 			if (stringValue == null) return false;
-			if (stringValue.length()!=13) return false;
+			System.out.println(stringValue.length() + "" +  (stringValue.length() == 8) +"+"+ stringValue.length() + (stringValue.length() == 13));
+			if (!((stringValue.length() == 8)||(stringValue.length()==13))) return false;
 			String creditCard = stringValue;
 			char[] chars = creditCard.toCharArray();
 
@@ -55,6 +56,7 @@ public class EAN13 implements IEAN, Serializable{
 			boolean even = false;
 			for ( int index = length - 1 ; index >= 0 ; index-- ) {
 				int digit = ints.get(index);
+				System.out.println(digit +"is even: "+ even);
 				if  (even) {
 					digit *= 3;
 				}
@@ -124,10 +126,11 @@ public class EAN13 implements IEAN, Serializable{
    * Sets/Updates the EAN if EAN is valid
    */
   public void setEan(long ean) throws NumberInvalidFormatException{
+	System.out.println("setEan called");
     if(isValid(ean)){
       ean13 = ean;
     }
-    else throw new NumberInvalidFormatException("This is not a valid EAN!");
+    else throw new NumberInvalidFormatException("This is not a valid EAN");
   }
 
 /**

@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import datatype.EAN13;
+import datatype.EAN;
 import datatype.IEAN;
 import foodServer.Article;
 import database.ArticleUtil;
@@ -57,8 +57,8 @@ public class ArticlePersistenceTests {
    */
   @Before
   public void testArticle() throws NumberInvalidFormatException {
-    ean1 = new EAN13(5010019640161L);
-    ean2 = new EAN13(1234567891019L);
+    ean1 = new EAN(5010019640161L);
+    ean2 = new EAN(1234567891019L);
     articleOne = new Article(ean1.getEAN());
     flags = new ArrayList<Flag>();
     for(int i=0;i<10;i++){
@@ -118,7 +118,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetName() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
     assertEquals(articleOne.getName(),newArticle.getName());
   }
 
@@ -131,7 +131,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetDescription() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
     assertEquals(articleOne.getDescription(),newArticle.getDescription());
   }
 
@@ -144,7 +144,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetImageURI() throws NumberInvalidFormatException, DatabaseConnectionException {
     //articleOne.persist();
-    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
     assertEquals(articleOne.getImageURL(),newArticle.getImageURL());
   }
 
@@ -157,7 +157,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetIngredients() throws DatabaseConnectionException, NumberInvalidFormatException {
 	    //articleOne.persist();
-	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
 	    for(Ingredient ingredient:newArticle.getIngredients()){
 	    	assertTrue(articleOne.getIngredients().contains(ingredient));
 	    }
@@ -172,7 +172,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
-	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
 	    for(IFlag flag:newArticle.getAllFlags()){
 	    	assertTrue(articleOne.getAllFlags().contains(flag));
 	    }
@@ -187,7 +187,7 @@ public class ArticlePersistenceTests {
   @Test
   public void testGetProductFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
-	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	    Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
 	    for(Flag flag:newArticle.getFlags()){
 	    	assertTrue(articleOne.getFlags().contains(flag));
 	    }
@@ -204,7 +204,7 @@ public class ArticlePersistenceTests {
 	  //articleOne.persist();
 	  articleOne.removeFlag(flags.get(0));
 	  //articleOne.persist();
-	  Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
+	  Article newArticle = ArticleUtil.getArticle(new EAN(articleOne.getID()));
 	  assertFalse(newArticle.getFlags().contains(flags.get(0)));
   }
 
