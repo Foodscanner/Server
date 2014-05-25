@@ -43,7 +43,7 @@ public class ArticleUtil {
 		System.out.println("query executed");
 		if(result.size() == 1){
 		article = result.get(0);
-		int i = 0;
+		Integer i = 0;
 		for(Flag f:article.getFlags()){
 			if(f!=null){i++;}		}
 		for(Flag f:article.getAllFlags()){
