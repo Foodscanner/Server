@@ -42,7 +42,6 @@ public class EAN implements IEAN, Serializable{
     Long longValue = new Long(value);
     String stringValue =  longValue.toString();
 			if (stringValue == null) return false;
-			System.out.println(stringValue.length() + "" +  (stringValue.length() == 8) +"+"+ stringValue.length() + (stringValue.length() == 13));
 			if (!((stringValue.length() == 8)||(stringValue.length()==13))) return false;
 			String creditCard = stringValue;
 			char[] chars = creditCard.toCharArray();
@@ -56,7 +55,6 @@ public class EAN implements IEAN, Serializable{
 			boolean even = false;
 			for ( int index = length - 1 ; index >= 0 ; index-- ) {
 				int digit = ints.get(index);
-				System.out.println(digit +"is even: "+ even);
 				if  (even) {
 					digit *= 3;
 				}
