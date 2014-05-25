@@ -2,9 +2,12 @@ package foodServer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,13 +30,16 @@ public class Ingredient implements IIngredient {
 	private List<Article> articles;
 
 	public Ingredient() {
+		name = "";
 		flags = new ArrayList<Flag>();
+		articles = new ArrayList<Article>();
 	}
 	
 
 
 	@Id
-	@Column(name = "ID", nullable = false)
+	@Column(name = "ID")
+	@GeneratedValue
 	public int getId() {
 		return this.id;
 	}
@@ -47,8 +53,8 @@ public class Ingredient implements IIngredient {
 		return this.name;
 	}
 
-	public void setName(String aName) {
-		this.name = aName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void addFlag(Flag flag) {
@@ -59,20 +65,12 @@ public class Ingredient implements IIngredient {
 		flags.remove(flag);
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="INGREDIENT_FLAGS",
 	joinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
 	public List<Flag> getFlags() {
-		// returns a new list to prevent modification of list of flags within
-		// ingredients. The flags itself should be modifiable
-		// therefore this level of deep-copying is sufficient
-		System.out.println("Copying " + flags.size() + " flags");
-		List<Flag> tempFlags = new ArrayList<Flag>();
-		for (Flag flag : this.flags) {
-			tempFlags.add(flag.copy());
-		}
-		return tempFlags;
+		return this.flags;
 	}
 	
 	public void setFlags(List<Flag> flags){

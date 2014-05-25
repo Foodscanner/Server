@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,11 +40,17 @@ import foodServer.exceptions.NumberInvalidFormatException;
 	@NamedQuery(name = Article.FIND_ARTICLES,
             query = "SELECT a " +
 		            "FROM ARTICLE a"),
-	@NamedQuery(name = Article.FIND_ARTICLE_BY_ARTICLEID,
+    @NamedQuery(name = Article.FIND_ARTICLE_BY_ARTICLEID,
 			query = "SELECT a " +
 					"FROM ARTICLE a " +
-					"WHERE a.ID = :" + Article.PARAM_ARTICLEID)})
-public class Article implements IArticle<EAN13> {
+					"WHERE a.ID = :" + Article.PARAM_ARTICLEID),
+	@NamedQuery(name = Article.FIND_FULL_ARTICLE_BY_ARTICLEID,
+			query = "SELECT article " +
+					"FROM ARTICLE article " +
+					"LEFT JOIN FETCH article.flags " +
+					"LEFT JOIN FETCH article.ingredients " + 
+					"WHERE article.ID = :" + Article.PARAM_ARTICLEID)})
+public class Article implements IArticle<EAN13,Flag,Ingredient> {
 	
 	private EAN13 ean;
 
@@ -67,6 +74,8 @@ public class Article implements IArticle<EAN13> {
 	
 	public static final String FIND_ARTICLES = "findArticles";	
 	public static final String FIND_ARTICLE_BY_ARTICLEID = "findArticleByArticleID";
+	public static final String FIND_FULL_ARTICLE_BY_ARTICLEID = "findFullArticleByArticleID";
+	
 	
 	public Article(){
 		ean = new EAN13();
@@ -184,16 +193,15 @@ public class Article implements IArticle<EAN13> {
 	/**
 	 * @see foodServer.IArticle#getFlags() Returns a list of all flags
 	 */
-	@ManyToMany
-	@JoinTable(name="Article_Flags",
-	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
-	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
-	public List<Flag> getFlags() {
-		return this.flags;
-	}
 	
-	public void setFlags(List<Flag> flags){
-		this.flags = flags;
+	public List<Flag> getAllFlags() {
+		List<Flag> allFlags = new ArrayList<Flag>();
+		allFlags.addAll(getFlags());
+		for(Ingredient i:ingredients){
+			allFlags.addAll(i.getFlags());
+		}
+		return allFlags;
+		
 	}
 
 	/**
@@ -216,22 +224,22 @@ public class Article implements IArticle<EAN13> {
 	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="ARTICLE_FLAGS",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
-	public List<Flag> getProductFlags() {
+	public List<Flag> getFlags() {
 		return flags;
 	}
 	
-	public void setProductFlags(List<Flag> flags){
+	public void setFlags(List<Flag> flags){
 		this.flags = flags;
 	}
 
 	/**
 	 * @see foodServer.IArticle#getIngredients() Returns a list of ingredients
 	 */
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="ARTICLE_INGREDIENTS",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"))

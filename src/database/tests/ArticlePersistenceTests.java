@@ -1,4 +1,4 @@
-package foodServer.tests;
+package database.tests;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ import org.junit.Test;
 import datatype.EAN13;
 import datatype.IEAN;
 import foodServer.Article;
-import foodServer.ArticleUtil;
+import database.ArticleUtil;
 import foodServer.Flag;
 import foodServer.IArticle;
 import foodServer.IFlag;
@@ -173,8 +173,8 @@ public class ArticlePersistenceTests {
   public void testGetFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
 	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
-	    for(IFlag flag:newArticle.getFlags()){
-	    	assertTrue(articleOne.getFlags().contains(flag));
+	    for(IFlag flag:newArticle.getAllFlags()){
+	    	assertTrue(articleOne.getAllFlags().contains(flag));
 	    }
   }
 
@@ -188,8 +188,8 @@ public class ArticlePersistenceTests {
   public void testGetProductFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
 	  //articleOne.persist();
 	    Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
-	    for(Flag flag:newArticle.getProductFlags()){
-	    	assertTrue(articleOne.getProductFlags().contains(flag));
+	    for(Flag flag:newArticle.getFlags()){
+	    	assertTrue(articleOne.getFlags().contains(flag));
 	    }
   }
 
@@ -205,7 +205,7 @@ public class ArticlePersistenceTests {
 	  articleOne.removeFlag(flags.get(0));
 	  //articleOne.persist();
 	  Article newArticle = ArticleUtil.getArticle(new EAN13(articleOne.getID()));
-	  assertFalse(newArticle.getProductFlags().contains(flags.get(0)));
+	  assertFalse(newArticle.getFlags().contains(flags.get(0)));
   }
 
 

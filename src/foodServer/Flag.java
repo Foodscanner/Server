@@ -45,8 +45,8 @@ public class Flag implements IFlag, Serializable {
 	}
 	
 	@Id
-	@Column(name = "ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID")
+	@GeneratedValue
 	public int getId() {
 		return this.id;
 	}

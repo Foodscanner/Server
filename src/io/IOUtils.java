@@ -9,7 +9,7 @@ import datatype.EAN13;
 import datatype.IEAN;
 import datatype.StandardExchangeArticle;
 import foodServer.Article;
-import foodServer.ArticleUtil;
+import database.ArticleUtil;
 import foodServer.Flag;
 import foodServer.IArticle;
 import foodServer.IFlag;
@@ -58,7 +58,7 @@ public class IOUtils {
 			sea.setName(article.getName());
 			sea.setDescription(article.getDescription());
 			sea.setPictureURL(article.getImageURL());
-			for (Flag flag : article.getFlags()) {
+			for (Flag flag : article.getAllFlags()) {
 				sea.addFlag(flag.getId(), flag.getName());
 			}
 		} catch (NumberInvalidFormatException NIFEx) {

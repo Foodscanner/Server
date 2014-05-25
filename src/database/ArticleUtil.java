@@ -1,4 +1,4 @@
-package foodServer;
+package database;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import datatype.EAN13;
 import datatype.IEAN;
+import foodServer.Article;
 import foodServer.exceptions.DatabaseConnectionException;
 
 /**
@@ -36,13 +37,16 @@ public class ArticleUtil {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		TypedQuery<Article> query = em.createNamedQuery(Article.FIND_ARTICLE_BY_ARTICLEID, Article.class);
 		query.setParameter(Article.PARAM_ARTICLEID, ean1.getEAN());
-		System.out.println(query);
 		try{
 		System.out.println("try block in getArticle reached");
 			List<Article> result = query.getResultList();
 			System.out.println(result);
 		System.out.println("query executed");
 		article = result.get(0);
+		for(foodServer.Flag f:article.getAllFlags()){
+			System.out.println(f);
+		}
+		System.out.println(article.getIngredients().size());
 		System.out.println("result 0 retrieved");
 		System.out.println(article);
 		return article; 

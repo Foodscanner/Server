@@ -12,7 +12,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gläser
  *
  */
-public interface IArticle<E> {
+public interface IArticle<E,F,I> {
 	
 	
 	//ID
@@ -60,30 +60,30 @@ public interface IArticle<E> {
 	 * Adds a product-specific flag
 	 * @param aFlag A flag that should be added to IArticle
 	 */
-	public void addFlag(Flag flag);
+	public void addFlag(F flag);
 
 	/**
 	 * Removes a product-specific flag
 	 * @param aFlag A flag that should be removed from IArticle
 	 */
-	public void removeFlag(Flag flag);
+	public void removeFlag(F flag);
 	
-	public List<Flag> getFlags();
+	public List<F> getFlags();
 	
-	public List<Flag> getProductFlags();
+	public List<F> getAllFlags();
 	
 	//Ingredients
-	public List<Ingredient> getIngredients();
+	public List<I> getIngredients();
 	
     /**
      * @param ingredient The ingredient to add
      */
-    public void addIngredient(Ingredient ingredient);
+    public void addIngredient(I ingredient);
     
     /**
      * @param ingredient The ingredient to remove
      */
-    public void removeIngredient(Ingredient ingredient);
+    public void removeIngredient(I ingredient);
 	
 
 
