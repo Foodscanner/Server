@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 //TODO MappedByMethod for Article & Ingredient
 /**
@@ -20,24 +22,40 @@ import javax.persistence.ManyToMany;
  * 
  */
 @Entity(name="FLAG")
+@NamedQueries({
+	//NamedQuery zur Auflistung aller Artikel
+	@NamedQuery(name = Flag.FIND_FLAGS,
+            query = "SELECT f " +
+		            "FROM FLAG f"),
+    @NamedQuery(name = Flag.FIND_FLAG_BY_FLAGID,
+			query = "SELECT f " +
+					"FROM FLAG f " +
+					"WHERE f.id = :" + Flag.PARAM_FLAGID)})
 public class Flag implements IFlag, Serializable {
 
 	
 
 	/**
-	 * 
+	 * Generated serialVersionUID
 	 */
 	private static final long serialVersionUID = -7637310597378003342L;
-	/**
-	 * 
-	 */
-	// private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private String description;
 	private boolean limitToProduct;
 	private List<Article> articles;
 	private List<Ingredient> ingredients;
+	
+	//CONSTANTS
+	public static final String PARAM_FLAGID = "ID";
+	public static final String PARAM_NAME = "Name";
+	public static final String PARAM_DESCRIPTION = "Description";
+	public static final String PARAM_LIMITTOPRODUCT = "LimitToProduct";
+	
+	public static final String FIND_FLAGS = "findFlags";	
+	public static final String FIND_FLAG_BY_FLAGID = "findFlagByFlagID";
+	public static final String FIND_FULL_FLAG_BY_FLAGID = "findFullFlagByFlagID";
+	
 
 	public Flag(){
 		articles = new ArrayList<Article>();

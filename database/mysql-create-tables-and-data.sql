@@ -45,9 +45,10 @@ INSERT INTO FLAG (ID, Name, Description, LimitToProduct) VALUES
 (2, 'Gluten', 'Contains Gluten', 0),
 (3, 'Sugar', 'Contains a high amount of sugar', 0),
 (4, 'Strawberries', 'Contains Strawberries', 0),
-(5, 'Strawberries', 'Contains Strawberries', 0),
+(5, 'Peanuts', 'Contains Peanuts', 0),
 (6, 'Sugar', 'Contains Sugar', 0),
-(7, 'Phenylalanine', 'Contains a source of phenylalanine', 1);
+(7, 'Phenylalanine', 'Contains a source of phenylalanine', 1),
+(8, 'Salt', 'Contains a high amount of salt', 1);
 
 CREATE TABLE IF NOT EXISTS INGREDIENT (
   ID int(11) NOT NULL AUTO_INCREMENT,

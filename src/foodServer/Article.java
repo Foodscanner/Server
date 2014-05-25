@@ -224,7 +224,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="ARTICLE_FLAGS",
 	joinColumns=@JoinColumn(name="FK_ArticleID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
