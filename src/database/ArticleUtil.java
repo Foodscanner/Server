@@ -13,6 +13,7 @@ import database.exceptions.NonUniqueKeyException;
 import datatype.EAN;
 import datatype.IEAN;
 import foodServer.Article;
+import foodServer.Flag;
 import foodServer.exceptions.DatabaseConnectionException;
 
 /**
@@ -39,10 +40,16 @@ public class ArticleUtil {
 		query.setParameter(Article.PARAM_ARTICLEID, ean1.getEAN());
 		try{
 			List<Article> result = query.getResultList();
-			System.out.println(result);
 		System.out.println("query executed");
 		if(result.size() == 1){
-		article = result.get(0);}
+		article = result.get(0);
+		int i = 0;
+		for(Flag f:article.getFlags()){
+			if(f!=null){i++;}		}
+		for(Flag f:article.getAllFlags()){
+			if(f!=null){i++;}
+		}
+		}
 		else if(result.size()>1){
 			throw new NonUniqueKeyException("The ean " + ean1 + " supplied is not unique. Please contact the Database administrator!");
 		}

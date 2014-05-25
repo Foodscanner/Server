@@ -201,7 +201,6 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 			allFlags.addAll(i.getFlags());
 		}
 		return allFlags;
-		
 	}
 
 	/**

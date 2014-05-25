@@ -65,7 +65,7 @@ public class Ingredient implements IIngredient {
 		flags.remove(flag);
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="INGREDIENT_FLAGS",
 	joinColumns=@JoinColumn(name="FK_IngredientID",referencedColumnName="ID"),
 	inverseJoinColumns=@JoinColumn(name="FK_FlagID",referencedColumnName="ID"))
