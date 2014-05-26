@@ -24,7 +24,7 @@ public interface IArticle<E,F,I> {
 	/**
 	 * Necessary in case EAN changes, should be used with caution
 	 * @param aID This id is being set
-	 * @throws NumberInvalidFormatException 
+	 * @throws NumberInvalidFormatException Is thrown if number is not a valid ean
 	 */
 	public void setID(long aID) throws NumberInvalidFormatException;
 
@@ -43,7 +43,7 @@ public interface IArticle<E,F,I> {
 	public String getImageURL();
 	
 	/**
-	 * @param aImageURI The image URI to set
+	 * @param ImageURL The image URI to set
 	 */
 	public void setImageURL(String ImageURL);
 	
@@ -58,13 +58,13 @@ public interface IArticle<E,F,I> {
 	//Flags
 	/**
 	 * Adds a product-specific flag
-	 * @param aFlag A flag that should be added to IArticle
+	 * @param flag A flag that should be added to IArticle
 	 */
 	public void addFlag(F flag);
 
 	/**
 	 * Removes a product-specific flag
-	 * @param aFlag A flag that should be removed from IArticle
+	 * @param flag A flag that should be removed from IArticle
 	 */
 	public void removeFlag(F flag);
 	

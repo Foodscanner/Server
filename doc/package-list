@@ -1,3 +1,6 @@
+database
+database.exceptions
+database.tests
 datatype
 datatype.test
 foodServer

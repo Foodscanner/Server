@@ -15,6 +15,7 @@ import datatype.IEAN;
 import foodServer.Article;
 import foodServer.Flag;
 import foodServer.exceptions.DatabaseConnectionException;
+import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
  * Used for creating instances of Articles by retrieving them from database
@@ -32,6 +33,7 @@ public class ArticleUtil {
 	 * Retrieves an article from database and sets values correctly
 	 * @param ean1 The id of the article, needs to be a valid EAN
 	 * @return An article of type Article, if article is in Database. Else null is returned.
+     * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
 	 */
 	public static Article getArticle(IEAN ean1) throws DatabaseConnectionException {
 		Article article = null;

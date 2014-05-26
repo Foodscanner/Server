@@ -71,7 +71,7 @@ public class ArticleTests {
 	}
 
 	/**
-	 * Test method for {@link foodServer.Article#Article(IEAN)}.
+	 * Test method for {@link foodServer.Article#Article(long)}.
 	 */
 	@Test
 	public void testArticle() {
@@ -87,8 +87,8 @@ public class ArticleTests {
 	}
 
 	/**
-	 * Test method for {@link foodServer.Article#setID(IEAN)}.
-	 * @throws NumberInvalidFormatException 
+	 * Test method for {@link foodServer.Article#setID(long)}.
+	 * @throws NumberInvalidFormatException Is thrown if number is not a valid ean
 	 */
 	@Test
 	public void testSetID() throws NumberInvalidFormatException {
@@ -102,7 +102,7 @@ public class ArticleTests {
 	 */
 	@Test
 	public void testGetName() {
-		assertEquals(testArticle.getName(), "Goldb�ren");
+		assertEquals(testArticle.getName(), "Goldbaeren");
 	}
 
 	/**
@@ -135,18 +135,18 @@ public class ArticleTests {
 	}
 
 	/**
-	 * Test method for {@link foodServer.Article#getImageURI()}.
+	 * Test method for {@link foodServer.Article#getImageURL()}.
 	 */
 	@Test
-	public void testGetImageURI() {
+	public void testGetImageURL() {
 			assertEquals(testArticle.getImageURL(), "http://example.com/getImage?param=exampleParam");
 	}
 
 	/**
-	 * Test method for {@link foodServer.Article#setImageURI(java.net.URI)}.
+	 * Test method for {@link foodServer.Article#setImageURL(String)}.
 	 */
 	@Test
-	public void testSetImageURI() {
+	public void testSetImageURL() {
 			assertEquals(testArticle.getImageURL(), "http://example.com/getImage?param=exampleParam");
 			testArticle.setImageURL("http://example.org/getImage2?param2=exampleParam2");
 			assertEquals(testArticle.getImageURL(), "http://example.org/getImage2?param2=exampleParam2");
@@ -171,7 +171,7 @@ public class ArticleTests {
 
 	/**
 	 * Flag needs to be tested to create reliable results here Test method for
-	 * {@link foodServer.Article#getProductFlags()}.
+	 * {@link foodServer.Article#getFlags()}.
 	 */
 	@Test
 	public void testGetProductFlags() {
@@ -179,7 +179,7 @@ public class ArticleTests {
 	}
 
 	/**
-	 * Test method for {@link foodServer.Article#removeFlag(foodServer.IFlag)}.
+	 * Test method for {@link foodServer.Article#removeFlag(foodServer.Flag)}.
 	 */
 	@Test
 	public void testRemoveFlag() {

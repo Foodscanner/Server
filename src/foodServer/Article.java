@@ -77,16 +77,15 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	/**
 	 * Constructor of an article with parameter id
 	 * 
-	 * @param ean
-	 *            The ean to set
+	 * @param ean The ean to set
 	 * @throws NumberInvalidFormatException
 	 *             This exception is thrown if number is not a valid EAN. Use
 	 *             EAN validation from datatypes/EAN to prevent exception
 	 * 
 	 */
-	public Article(long id) throws NumberInvalidFormatException {
+	public Article(long ean) throws NumberInvalidFormatException {
 		this();
-		setID(id);
+		setID(ean);
 	}
 
 	/* (non-Javadoc)
@@ -113,16 +112,16 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	/**
 	 * If aId is a valid id, it is set as new id
 	 * 
-	 * @see foodServer.IArticle#setID(IEAN ean)
-	 * @param ean
-	 *            The ean to set
-	 * @throws NumberInvalidFormatException 
+	 * @see foodServer.IArticle#setID(long ean)
+	 * @param ean The ean to set
+	 * @throws NumberInvalidFormatException If number is not valid NumberInvalidFormatException is thrown
 	 */
-	public void setID(long id) throws NumberInvalidFormatException {
-		if(this.ean.isValid(id)){
-		this.id = id;
-		this.ean.setEan(id);
+	public void setID(long ean) throws NumberInvalidFormatException {
+		if(this.ean.isValid(ean)){
+		this.id = ean;
+		this.ean.setEan(ean);
 		}
+		else throw new NumberInvalidFormatException();
 	}
 
 	/**
@@ -160,7 +159,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#getImageURI() Gets the image URI
+	 * @see foodServer.IArticle#getImageURL() Gets the image URL
 	 **/
 	@Column(name="ImageURL")
 	public String getImageURL() {
@@ -169,7 +168,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#setImageURI(java.net.URI) Sets the URI of the
+	 * @see foodServer.IArticle#setImageURL(String) Sets the URL of the
 	 *      image
 	 */
 	public void setImageURL(String imageURL) {
@@ -190,7 +189,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#addFlag(foodServer.IFlag) Adds a product
+	 * @see foodServer.IArticle#addFlag(java.lang.Object) Adds a product
 	 *      specific flag
 	 */
 	public void addFlag(Flag aFlag) {
@@ -198,7 +197,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#removeFlag(foodServer.IFlag) Removes a product
+	 * @see foodServer.IArticle#removeFlag(java.lang.Object) Removes a product
 	 *      specific flag. If flag doesn't exist, request is ignored
 	 */
 	public void removeFlag(Flag aFlag) {
@@ -206,7 +205,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#getProductFlags() Returns the product specific
+	 * @see foodServer.IArticle#getFlags() Returns the product specific
 	 *      flags. Logically, this is a subset of all flags
 	 */
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -244,7 +243,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#addIngredient(foodServer.IIngredient) Adds an
+	 * @see foodServer.IArticle#addIngredient(java.lang.Object) Adds an
 	 *      ingredient
 	 */
 	public void addIngredient(Ingredient ingredient) {
@@ -252,7 +251,7 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 	}
 
 	/**
-	 * @see foodServer.IArticle#removeIngredient(foodServer.IIngredient) Removes
+	 * @see foodServer.IArticle#removeIngredient(java.lang.Object) Removes
 	 *      an ingredient
 	 */
 	public void removeIngredient(Ingredient ingredient) {

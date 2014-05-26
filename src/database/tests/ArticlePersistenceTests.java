@@ -55,7 +55,7 @@ public class ArticlePersistenceTests {
 
 
   /**
-   * Test method for {@link foodServer.Article#Article(IEAN)}.
+   * Test method for {@link foodServer.Article#Article(long)}.
    * Tests if an error occurs during persistence
    * @throws NumberInvalidFormatException If ean set during test is invalid, which should not occur
    */
@@ -100,8 +100,8 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getID()}.
    * Tests if persisted is equal to id articleOne
-   * @throws NumberInvalidFormatException Is thrown if id is not a valid ean
- * @throws DatabaseConnectionException 
+   * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testGetID() throws NumberInvalidFormatException, DatabaseConnectionException {
@@ -115,8 +115,8 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getName()}.
    * Tests if persisted name is equal
-   * @throws NumberInvalidFormatException Is thrown if number is not a valid EAN
- * @throws DatabaseConnectionException 
+    * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    * 
    */
   @Test
@@ -130,7 +130,7 @@ public class ArticlePersistenceTests {
    * Test method for {@link foodServer.Article#getDescription()}.
    * Tests if persisted Description is equal
    * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
- * @throws DatabaseConnectionException 
+ * @throws DatabaseConnectionException Is thrown if database connection could not be established
    */
   @Test
   public void testGetDescription() throws NumberInvalidFormatException, DatabaseConnectionException {
@@ -140,10 +140,10 @@ public class ArticlePersistenceTests {
   }
 
   /**
-   * Test method for {@link foodServer.Article#getImageURI()}.
+   * Test method for {@link foodServer.Article#getImageURL()}.
    * Tests if persisted imageURI is equal
    * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
- * @throws DatabaseConnectionException 
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testGetImageURI() throws NumberInvalidFormatException, DatabaseConnectionException {
@@ -155,8 +155,8 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getIngredients()}.
    * Tests if all ingredients have been persisted
- * @throws DatabaseConnectionException 
- * @throws NumberInvalidFormatException 
+   * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testGetIngredients() throws DatabaseConnectionException, NumberInvalidFormatException {
@@ -170,8 +170,8 @@ public class ArticlePersistenceTests {
   /**
    * Test method for {@link foodServer.Article#getFlags()}.
    * Tests if all flags can be retrieved
- * @throws DatabaseConnectionException 
- * @throws NumberInvalidFormatException 
+   * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testGetFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
@@ -183,10 +183,10 @@ public class ArticlePersistenceTests {
   }
 
   /**
-   * Test method for {@link foodServer.Article#getProductFlags()}.
+   * Test method for {@link foodServer.Article#getFlags()}.
    * Tests if all product specific flag can be retrieved
- * @throws DatabaseConnectionException 
- * @throws NumberInvalidFormatException 
+   * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testGetProductFlags() throws DatabaseConnectionException, NumberInvalidFormatException {
@@ -198,10 +198,10 @@ public class ArticlePersistenceTests {
   }
 
   /**
-   * Test method for {@link foodServer.Article#removeFlag(foodServer.IFlag)}.
+   * Test method for {@link foodServer.Article#removeFlag(foodServer.Flag)}.
    * Tests if a flag can be removed and if change can be persisted
- * @throws DatabaseConnectionException 
- * @throws NumberInvalidFormatException 
+   * @throws NumberInvalidFormatException If number is not a valid EAN, exception is thrown
+   * @throws DatabaseConnectionException If database connection is not possible, exception is thrown
    */
   @Test
   public void testRemoveProductFlag() throws DatabaseConnectionException, NumberInvalidFormatException {

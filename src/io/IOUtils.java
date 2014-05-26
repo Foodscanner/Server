@@ -24,9 +24,8 @@ public class IOUtils {
 	 * Upon getting a long ID originating in the scanner app returns a StandardExchangeArticle in an XStream XML stream as a String object.
 	 * If the ID is valid and the article contained in the database, the StandardExchangeArticle contains Information about that Article.
 	 * If the ID is invalid or the article does not exist in the database, the StandardExchangeArticle contains Information to that effect.
-	 * @param ID
-	 * @return
-	 * @throws NumberInvalidFormatException
+	 * @param ID The id of the article to be serialized
+	 * @return A serialized article
 	 */
 	public static String getArticle(long ID) {
 		String returnString = null;
@@ -35,6 +34,10 @@ public class IOUtils {
 		return returnString;
 	}
 	
+	/**
+	 * @param ID The id of the article to be serialized
+	 * @return A serialized article
+	 */
 	public static String getArticle(String ID) {
 		String returnString = null;
 		XStream serializer = new XStream();
@@ -63,6 +66,10 @@ public class IOUtils {
 		return returnString;
 	}*/
 	
+	/**
+	 * @param ID The id of the article
+	 * @return A simple article which can be serialized
+	 */
 	public static StandardExchangeArticle getStandardExchangeArticle(long ID){
 		StandardExchangeArticle sea = new StandardExchangeArticle();
 		sea.setID(ID);
