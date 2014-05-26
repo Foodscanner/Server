@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
@@ -57,6 +56,9 @@ public class Flag implements IFlag, Serializable {
 	public static final String FIND_FULL_FLAG_BY_FLAGID = "findFullFlagByFlagID";
 	
 
+	/**
+	 * Standard constructor used to initialize lists
+	 */
 	public Flag(){
 		articles = new ArrayList<Article>();
 		ingredients = new ArrayList<Ingredient>();
@@ -69,6 +71,10 @@ public class Flag implements IFlag, Serializable {
 		return this.id;
 	}
 
+	/**
+	 * @see foodServer.IFlag#setId(int)
+	 * Sets the id of article
+	 */
 	public void setId(int aId) {
 		this.id = aId;
 	}
@@ -78,6 +84,9 @@ public class Flag implements IFlag, Serializable {
 		return this.name;
 	}
 
+	/**
+	 * @see foodServer.IFlag#setName(java.lang.String)
+	 */
 	public void setName(String aName) {
 		this.name = aName;
 	}
@@ -87,10 +96,18 @@ public class Flag implements IFlag, Serializable {
 		return this.description;
 	}
 
+	/**
+	 * @see foodServer.IFlag#setDescription(java.lang.String)
+	 * Sets the description of Article
+	 */
 	public void setDescription(String aDescription) {
 		this.description = aDescription;
 	}
 
+	/**
+	 * @see foodServer.IFlag#getLimitToProduct()
+	 * Limits the flag to product
+	 */
 	@Column(name = "LimitToProduct")
 	public boolean getLimitToProduct() {
 		return this.limitToProduct;
@@ -119,6 +136,10 @@ public class Flag implements IFlag, Serializable {
 		return this.ingredients;
 	}
 
+	/**
+	 * @param ingredients
+	 * Sets the list of ingredients which use this flag
+	 */
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}

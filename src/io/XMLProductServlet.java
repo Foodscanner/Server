@@ -2,9 +2,13 @@ package io;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +19,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(description = "Connector from Server to classes", urlPatterns = { "/ProductInformation.xml" })
 public class XMLProductServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
        
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6688374884589513303L;
+
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public XMLProductServlet() {
@@ -31,19 +40,23 @@ public class XMLProductServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,HttpServletResponse response)
     		   throws ServletException,IOException
     		   {
-    	String id = request.getParameter("id");
-    	PrintWriter pwriter=response.getWriter();
     		       //ServletContext object creation
     		       ServletContext scontext=getServletContext();
     		       
     		       
     		       //id-->convert to long
-    		       //
+    		       //  
+    		       	   String ean = request.getParameter("ean");
+    		       	   System.out.println(ean);
     	        	   response.setContentType("content/xml");
-    	        	   pwriter.println(IOUtils.getArticle(1L));
+    	        	   response.setCharacterEncoding("UTF-8");
+    	        	   ServletOutputStream os = response.getOutputStream();
+    	        	   os.print(IOUtils.getArticle(ean));
+    	        	   os.print("<!--Generated @"+ InetAddress.getLocalHost().getHostName() + " on: " + new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime())+"-->");
+    	        	   os.flush();
+    	        	   os.close();
     	           
-    	           
-    		       pwriter.close();
+    		       
     		   }
 
 

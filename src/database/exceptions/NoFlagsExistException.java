@@ -1,5 +1,9 @@
 package database.exceptions;
 
+/**
+ * @author Christian Gläser
+ * Exception is thrown if no flags exist
+ */
 public class NoFlagsExistException extends Exception {
 	
 	/**

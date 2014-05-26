@@ -25,24 +25,25 @@
 			<version>4.3.5.Final</version>
 		</dependency>
 		<dependency>
-	<groupId>org.hibernate</groupId>
-	<artifactId>hibernate-annotations</artifactId>
-	<version>3.5.6-Final</version>
-</dependency>
-<dependency>
-	<groupId>org.hibernate</groupId>
-	<artifactId>antlr</artifactId>
-	<version>2.7.5H3</version>
-</dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.6-Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>antlr</artifactId>
+			<version>2.7.5H3</version>
+		</dependency>
 
-		
+
 		<!-- optional -->
-
+		<!-- xstream for serializing xml -->
 		<dependency>
 			<groupId>xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+		<!-- postgresql driver -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -84,9 +85,14 @@
 			<version>1.1</version>
 			<type>maven-plugin</type>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>5.0.1</version>
+		</dependency>
 	</dependencies>
 	<build>
-	    <finalName>Foodscanner</finalName>
+		<finalName>Foodscanner</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
@@ -127,30 +133,14 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	<!-- </build>
-	<build> -->
-		<!--  <finalName>Foodscanner</finalName>-->
-		<!--  <plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<configuration>
-					<url>http://foodserver.cloudapp.net/manager</url>
-					<server>foodserver</server>
-					<path>/</path>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<inherited>true</inherited>
-				<configuration>
-					<classpathContainers>
-						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer>
-						<classpathContainer>org.eclipse.jdt.USER_LIBRARY/TOMCAT_6.0.14_LIBRARY</classpathContainer>
-					</classpathContainers>
-				</configuration>
-			</plugin>
-		 </plugins> -->
+		<!-- </build> <build> -->
+		<!-- <finalName>Foodscanner</finalName> -->
+		<!-- <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>tomcat-maven-plugin</artifactId> 
+			<configuration> <url>http://foodserver.cloudapp.net/manager</url> <server>foodserver</server> 
+			<path>/</path> </configuration> </plugin> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+			<artifactId>maven-eclipse-plugin</artifactId> <inherited>true</inherited> 
+			<configuration> <classpathContainers> <classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER</classpathContainer> 
+			<classpathContainer>org.eclipse.jdt.USER_LIBRARY/TOMCAT_6.0.14_LIBRARY</classpathContainer> 
+			</classpathContainers> </configuration> </plugin> </plugins> -->
 	</build>
 </project>

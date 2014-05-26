@@ -1,28 +1,20 @@
 package foodServer;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.ManyToMany;
 
 
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-import org.hibernate.annotations.Type;
 
 import datatype.EAN;
 import datatype.IEAN;
@@ -185,15 +177,9 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 		this.imageURL = imageURL;
 	}
 
-	/*
-	 * setIngredients(List<IIngredient> aIIngredient) { throw new
-	 * UnsupportedOperationException(); }
-	 */
-
 	/**
 	 * @see foodServer.IArticle#getFlags() Returns a list of all flags
 	 */
-	
 	public List<Flag> getAllFlags() {
 		List<Flag> allFlags = new ArrayList<Flag>();
 		allFlags.addAll(getFlags());
@@ -231,6 +217,10 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 		return flags;
 	}
 	
+	
+	/**
+	 * @param flags The flags to be set as flags in @see foodserver.Article
+	 */
 	public void setFlags(List<Flag> flags){
 		this.flags = flags;
 	}
@@ -246,6 +236,9 @@ public class Article implements IArticle<EAN,Flag,Ingredient> {
 		return ingredients;
 	}
 	
+	/**
+	 * @param ingredients The ingredients to be set as ingredients in @see foodserver.Article
+	 */
 	public void setIngredients(List<Ingredient> ingredients){
 		this.ingredients = ingredients;
 	}

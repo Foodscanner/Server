@@ -42,6 +42,27 @@ public class IOUtils {
 		return returnString;
 	}
 	
+	/*
+	public static String getValidXMLArticle(String ID) {
+		String returnString = null;
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		Writer writer;
+		try {
+			 writer = new OutputStreamWriter(outputStream, "UTF-8");
+			 writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+			 XStream serializer = new XStream(new DomDriver("UTF-8"));
+			 writer.write(serializer.toXML(getStandardExchangeArticle(ID)));
+			 writer.flush();
+			 returnString = outputStream.toString();
+			 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return returnString;
+	}*/
+	
 	public static StandardExchangeArticle getStandardExchangeArticle(long ID){
 		StandardExchangeArticle sea = new StandardExchangeArticle();
 		sea.setID(ID);

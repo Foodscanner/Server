@@ -11,6 +11,10 @@ import database.exceptions.NoFlagsExistException;
 import foodServer.Flag;
 import foodServer.exceptions.DatabaseConnectionException;
 
+/**
+ * @author Christian Gläser
+ * Tests concerning flag persistence
+ */
 public class FlagPersistenceTests {
 	
 	@Test

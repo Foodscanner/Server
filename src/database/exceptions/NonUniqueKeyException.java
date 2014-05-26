@@ -1,5 +1,9 @@
 package database.exceptions;
 
+/**
+ * @author Christian Gläser
+ * Exception is thrown if unique key is not unique
+ */
 public class NonUniqueKeyException extends Exception {
 	
 	/**

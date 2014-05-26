@@ -25,6 +25,10 @@ import foodServer.Ingredient;
 import foodServer.exceptions.DatabaseConnectionException;
 import foodServer.exceptions.NumberInvalidFormatException;
 
+/**
+ * @author Christian Gläser
+ * Tests concerning article persistence
+ */
 public class ArticlePersistenceTests {
   
   Article articleOne;
