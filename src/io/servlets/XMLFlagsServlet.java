@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class XMLFlagServlet
+ * @author Christian Gläser
+ * @author Felipe Oehrwald
  */
 @WebServlet(description = "Returns all flags", urlPatterns = { "/Flags.xml" })
 public class XMLFlagsServlet extends HttpServlet {
