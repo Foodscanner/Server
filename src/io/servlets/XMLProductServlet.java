@@ -1,4 +1,6 @@
-package io;
+package io.servlets;
+
+import io.IOUtils;
 
 import java.io.IOException;
 import java.io.PrintWriter;

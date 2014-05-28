@@ -10,6 +10,7 @@ import datatype.IEAN;
 import datatype.StandardExchangeArticle;
 import foodServer.Article;
 import database.ArticleUtil;
+import database.exceptions.NoFlagsExistException;
 import foodServer.Flag;
 import foodServer.IArticle;
 import foodServer.IFlag;
@@ -118,6 +119,23 @@ public class IOUtils {
 			return sea;
 		}
 	}
-	
+
+	/**
+	 * @return A list of Flags
+	 */
+	public static String getFlags() {
+		String returnString = null;
+		XStream serializer = new XStream();
+		try {
+			returnString = serializer.toXML(database.FlagUtil.getAllFlags());
+		} catch (NoFlagsExistException e) {
+			// TODO Auto-generated catch block
+			returnString = "No flags exist";
+		} catch (DatabaseConnectionException e) {
+			// TODO Auto-generated catch block
+			returnString = "Database unreachable";
+		}
+		return returnString;
+	}
 
 }
