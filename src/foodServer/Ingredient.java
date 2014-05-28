@@ -2,7 +2,6 @@ package foodServer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +34,7 @@ import javax.persistence.NamedQuery;
 						"FROM INGREDIENT i " +
 						"WHERE i.id = :" + Ingredient.PARAM_INGREDIENTID),
 })
-public class Ingredient implements IIngredient {
+public class Ingredient implements IIngredient<Flag> {
 	private int id;
 	private String name;
 	private List<Flag> flags;

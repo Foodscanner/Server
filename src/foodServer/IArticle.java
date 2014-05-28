@@ -1,6 +1,5 @@
 package foodServer;
 
-import java.net.URI;
 import java.util.List;
 
 import datatype.IEAN;
@@ -12,7 +11,7 @@ import foodServer.exceptions.NumberInvalidFormatException;
  * @author Christian Gläser
  *
  */
-public interface IArticle<E,F,I> {
+public interface IArticle<E extends IEAN,F extends IFlag,I extends IIngredient<F>> {
 	
 	
 	//ID

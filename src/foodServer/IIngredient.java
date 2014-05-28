@@ -7,17 +7,17 @@ import java.util.List;
  * @author Christian Gläser
  *
  */
-public interface IIngredient {
+public interface IIngredient<F extends IFlag> {
   
   public int getId();
 
   public String getName();
   
-  public List<Flag> getFlags();
+  public List<F> getFlags();
   
-  void removeFlag(Flag flag);
+  void removeFlag(F flag);
 
-  public void addFlag(Flag flag);
+  public void addFlag(F flag);
 
   public void setId(int aID);
   
