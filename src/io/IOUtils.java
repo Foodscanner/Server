@@ -125,16 +125,23 @@ public class IOUtils {
 	 */
 	public static String getFlags() {
 		String returnString = null;
+		StandardExchangeArticle sea = new StandardExchangeArticle();
+		sea.setID(0);
+		sea.setName("flag list");
+		sea.setPictureURL("https://openclipart.org/image/2400px/svg_to_png/3152/nicubunu_Game_marbles_-_flags.png");
 		XStream serializer = new XStream();
 		try {
-			returnString = serializer.toXML(database.FlagUtil.getAllFlags());
+			for(Flag flag : database.FlagUtil.getAllFlags())
+			{
+				sea.addFlag(flag.getId(), flag.getName());
+			}
+			sea.setDescription("This is a list of all currently supported flags");
 		} catch (NoFlagsExistException e) {
-			// TODO Auto-generated catch block
-			returnString = "No flags exist";
+			sea.setDescription("Error: No flags exist!");
 		} catch (DatabaseConnectionException e) {
-			// TODO Auto-generated catch block
-			returnString = "Database unreachable";
+			sea.setDescription("Error: Database unreachable!");
 		}
+		returnString = serializer.toXML(sea);
 		return returnString;
 	}
 
