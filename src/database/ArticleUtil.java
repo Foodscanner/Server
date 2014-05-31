@@ -59,8 +59,16 @@ public class ArticleUtil {
 		catch (Exception ex){
 		throw new DatabaseConnectionException("Exception ex has been thrown, stacktrace: " + ex);
 		}
-		
+		em.flush();
+		em.close();
 		return article;
+	}
+	
+	public static void setArticle(Article article){
+		EntityManager em = EntityManagerUtil.getEntityManager();
+		em.persist(article);
+		em.flush();
+		em.close();
 	}
 	
 	//if more kinds of articles existed, more methods would be here
