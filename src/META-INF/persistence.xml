@@ -4,6 +4,7 @@
 		<class>foodServer.Article</class>
 		<class>foodServer.Flag</class>
 		<class>foodServer.Ingredient</class>
+		<class>foodServer.User</class>
 		<properties>
 		    <property name="eclipselink.logging.level" value="FINE"/>
 			<property name="hibernate.jpa.HibernatePersistenceProvider" value="META-INF/hibernate.cfg.xml"/>
