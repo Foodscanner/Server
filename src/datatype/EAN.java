@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
+
 import foodServer.exceptions.NumberInvalidFormatException;
 
 /**
@@ -62,6 +64,18 @@ public class EAN implements IEAN, Serializable{
 				even = !even;
 			}
 			return  sum % 10 == 0;
+	}
+  
+	@Override
+	public boolean isValid(String ean) {
+		try{
+		long lid = Long.parseLong(ean);
+		return isValid(lid);
+		}
+		catch(NumberFormatException ex){
+			return false;
+		}
+		
 	}
   
   /**
@@ -130,6 +144,11 @@ public class EAN implements IEAN, Serializable{
     }
     else throw new NumberInvalidFormatException("This is not a valid EAN");
   }
+  
+	@Override
+	public void setEan(String ean) throws NumberInvalidFormatException {
+		setEan(Long.parseLong(ean));
+	}
 
 /**
  * @see datatype.IEAN#getEAN()

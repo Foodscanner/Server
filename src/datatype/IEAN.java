@@ -15,6 +15,8 @@ public interface IEAN {
  	 */
 	public boolean isValid(long ean);
 	
+	public boolean isValid(String ean);
+	
 	/**
 	 * @return value of IEAN as long
 	 */
@@ -30,6 +32,6 @@ public interface IEAN {
 	 */
 	public void setEan(long ean) throws NumberInvalidFormatException;
 	
-
+	public void setEan(String ean) throws NumberInvalidFormatException;
 
 }

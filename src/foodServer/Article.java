@@ -37,11 +37,11 @@ import foodServer.exceptions.NumberInvalidFormatException;
 					"FROM ARTICLE a " +
 					"WHERE a.ID = :" + Article.PARAM_ARTICLEID),
 	@NamedQuery(name = Article.FIND_FULL_ARTICLE_BY_ARTICLEID,
-			query = "SELECT article " +
-					"FROM ARTICLE article " +
-					"LEFT JOIN FETCH article.flags " +
-					"LEFT JOIN FETCH article.ingredients " + 
-					"WHERE article.ID = :" + Article.PARAM_ARTICLEID)})
+			query = "SELECT a " +
+					"FROM ARTICLE a " +
+					"LEFT JOIN FETCH a.flags " +
+					"LEFT JOIN FETCH a.ingredients " + 
+					"WHERE a.ID = :" + Article.PARAM_ARTICLEID)})
 public class Article implements IArticle<EAN,Flag,Ingredient> {
 	
 	private EAN ean;

@@ -64,6 +64,10 @@ public class ArticleUtil {
 		return article;
 	}
 	
+	public static Article getArticle(String ean) throws NumberFormatException, DatabaseConnectionException, NumberInvalidFormatException{
+		return getArticle(new EAN(Long.parseLong(ean)));		
+	}
+	
 	public static void setArticle(Article article){
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		em.persist(article);
