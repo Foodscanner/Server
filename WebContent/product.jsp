@@ -72,7 +72,12 @@ StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(request.getPara
 					<h2>
 						<% 
 						out.write(sea.getDescription());
-						out.write(info);%>
+						out.write(info);
+						for(String s:sea.getIngredients().values())
+						{
+							out.write("<p>Ingredient:" + s + "</p>");
+						}
+						%>
 					</h2>
 				</div>
 				<!-- /col-lg-6 -->

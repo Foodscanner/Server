@@ -15,10 +15,12 @@ private String name;
 private String description;
 private String pictureURL;
 private HashMap<Integer, String> flags;
+private HashMap<Integer,String> ingredients;
 
 //initialized flags to prevent null pointer exception
 public StandardExchangeArticle(){
  flags = new HashMap<Integer,String>();
+ ingredients = new HashMap<Integer,String>();
 }
 
 public long getID() {
@@ -48,6 +50,10 @@ public void setPictureURL(String pictureURL) {
 public HashMap<Integer, String> getFlags() {
 	return flags;
 }
+
+public HashMap<Integer, String> getIngredients() {
+	return ingredients;
+}
 public void clearFlags() {
 	this.flags = new HashMap<Integer,String>();;
 }
@@ -58,6 +64,20 @@ public void addFlag(Integer id, String flag){
 
 public void removeFlag(Integer id){
 	flags.remove(id);
+}
+
+/**
+ * @return the ingredients
+ */
+public void removeIngredient(Integer id) {
+	ingredients.remove(id);
+}
+
+/**
+ * @param ingredients the ingredients to set
+ */
+public void addIngredient(Integer id,String ingredient) {
+	this.ingredients.put(id, ingredient);
 }
 
 }

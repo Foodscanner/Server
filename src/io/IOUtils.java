@@ -14,6 +14,7 @@ import database.exceptions.NoFlagsExistException;
 import foodServer.Flag;
 import foodServer.IArticle;
 import foodServer.IFlag;
+import foodServer.Ingredient;
 import foodServer.exceptions.DatabaseConnectionException;
 import foodServer.exceptions.NumberInvalidFormatException;
 
@@ -89,6 +90,9 @@ public class IOUtils {
 			sea.setPictureURL(article.getImageURL());
 			for (Flag flag : article.getAllFlags()) {
 				sea.addFlag(flag.getId(), flag.getName());
+			}
+			for(Ingredient ingredient:article.getIngredients()){
+				sea.addIngredient(ingredient.getId(), ingredient.getName());
 			}
 		} catch (NumberInvalidFormatException NIFEx) {
 			System.err.println(NIFEx);
