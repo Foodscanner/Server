@@ -73,9 +73,13 @@ StandardExchangeArticle sea = IOUtils.getStandardExchangeArticle(request.getPara
 						<% 
 						out.write(sea.getDescription());
 						out.write(info);
+						if(sea.getIngredients().size()>0){
+							out.write("<p>Ingredients: ");
 						for(String s:sea.getIngredients().values())
 						{
-							out.write("<p>Ingredient:" + s + "</p>");
+							out.write(s + ", ");
+						}
+						 	out.write("</p>");
 						}
 						%>
 					</h2>
